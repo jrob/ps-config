@@ -10,7 +10,7 @@ if ($usepscx3 -eq $True)
 }
 else
 {
-    Import-Module "$pscx\pscx.psd1" -arg "$scripts\powershell\Pscx.UserPreferences.ps1"   
+    Import-Module "$pscx\pscx.psd1" -arg "$scripts\powershell\Pscx.UserPreferences.ps1"
 }
 
 Import-Module "$scripts\powershell\posh-git"
