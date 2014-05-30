@@ -26,6 +26,8 @@ Import-Module "$scripts\powershell\posh-git"
 #Set-Alias bc "C:\Program Files (x86)\Beyond Compare 3\BComp.com"
 Set-Alias di ls
 
+Function ve { gvim.exe --remote-tab-silent $args }
+
 Set-Alias mr ($scripts + "\PowerShell\MassRename.ps1")
 Set-Alias which ($scripts + "\PowerShell\Which.ps1")
 
