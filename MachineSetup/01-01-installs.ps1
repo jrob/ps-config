@@ -15,6 +15,8 @@ choco install ccleaner
 choco install winscp
 choco install autohotkey
 choco install f.lux
+choco install spacesniffer
+choco install syncback
 
 # apps
 choco install keepass
@@ -32,5 +34,6 @@ choco install MsSqlServerManagementStudio2014Express
 choco install resharper
 
 #frameworks
+choco install mingw
 choco install StrawberryPerl
 choco install python
