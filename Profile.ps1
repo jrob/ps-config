@@ -14,6 +14,9 @@ else
 }
 
 Import-Module "$scripts\powershell\posh-git"
+Import-Module PSReadLine
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 #$e=Get-Date; ($e - $s).TotalSeconds
 
@@ -48,7 +51,7 @@ function mako { python ($scripts + "\Python\mako-render.py") $args }
 #}
 
 # http://blog.clintarmstrong.net/2011/05/powershell-history-persistence.html
-$MaximumHistoryCount = 31KB
+#$MaximumHistoryCount = 31KB
 
 #function bye
 #{
@@ -56,25 +59,25 @@ $MaximumHistoryCount = 31KB
 #    exit
 #}
 
-if (Test-Path ~\PowerShell-History.csv)
-{
-    Import-CSV ~\PowerShell-History.csv | Add-History
-    Get-History -Count 31KB | Export-CSV ~\PowerShell-history.csv
-}
+#if (Test-Path ~\PowerShell-History.csv)
+#{
+#    Import-CSV ~\PowerShell-History.csv | Add-History
+#    Get-History -Count 31KB | Export-CSV ~\PowerShell-history.csv
+#}
 
 cd ~
 
 # Shamelessly modified from http://winterdom.com/2008/08/mypowershellprompt
 $Global:skip = $true
 function prompt {
-    $hid = $myinvocation.historyID
-    if ($hid -gt 1 -and -not $skip) {
-        Get-History ($myinvocation.historyID -1 ) |
-            ConvertTo-Csv |
-            Select -last 1 |
-            Add-Content -Encoding UTF8 ~\PowerShell-History.csv
-    }
-    $Global:skip = $false
+    #$hid = $myinvocation.historyID
+    #if ($hid -gt 1 -and -not $skip) {
+    #    Get-History ($myinvocation.historyID -1 ) |
+    #        ConvertTo-Csv |
+    #        Select -last 1 |
+    #        Add-Content -Encoding UTF8 ~\PowerShell-History.csv
+    #}
+    #$Global:skip = $false
 
     # our theme
     $cdelim = [ConsoleColor]::DarkCyan
