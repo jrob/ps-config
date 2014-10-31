@@ -2,7 +2,9 @@
 
 $env:Path += ";" + $scripts + "\powershell"
 $env:Path += ";" + $scripts + "\python"
+$env:Path += ";" + $scripts + "\Perl\ack"
 $env:PATHEXT += ";.py"
+$env:PATHEXT += ";.pl"
 
 if ($usepscx3 -eq $True)
 {
