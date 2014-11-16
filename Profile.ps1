@@ -16,9 +16,6 @@ else
 }
 
 Import-Module "$scripts\powershell\posh-git"
-Import-Module PSReadLine
-Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 #$e=Get-Date; ($e - $s).TotalSeconds
 
@@ -66,6 +63,59 @@ function mako { python ($scripts + "\Python\mako-render.py") $args }
 #    Import-CSV ~\PowerShell-History.csv | Add-History
 #    Get-History -Count 31KB | Export-CSV ~\PowerShell-history.csv
 #}
+
+# http://blog.joonro.net/en/2013/12/20/persistent_history_and_history_search_with_arrow_keys_in_powershell.html
+# Persistent history with duplicate removal
+#
+# http://orsontyrell.blogspot.ca/2013/11/true-powershell-command-history.html
+
+$MaximumHistoryCount = 31KB
+$ImportedHistoryCount = 0
+$HistoryDirPath = "~\"
+$HistoryFileName = "history.xml"
+
+if (!(Test-Path $HistoryDirPath -PathType Container))
+    {   New-Item $HistoryDirPath -ItemType Directory }
+
+Register-EngineEvent PowerShell.Exiting –Action {
+        $TotalHistoryCount = 0
+        Get-History | ? {$TotalHistoryCount++;$true}
+        $RecentHistoryCount = $TotalHistoryCount - $ImportedHistoryCount
+        $RecentHistory = Get-History -Count $RecentHistoryCount
+        if (!(Test-path ($HistoryDirPath + $HistoryFileName)))
+        {
+            "new file" >> c:\temp\out.txt
+            Get-History | Export-Clixml ($HistoryDirPath + $HistoryFileName)
+        }else
+        {
+            "add to file" >> c:\temp\out.txt
+            $OldHistory = Import-Clixml ($HistoryDirPath + $HistoryFileName)
+            $NewHistory = @()
+            $OldHistory | foreach {$NewHistory += $_}
+            $RecentHistory | foreach {$NewHistory += $_}
+            # Deduplicate
+            $NewHistory = $NewHistory | Group StartExecutionTime | Foreach {$_.Group[0]}
+            $NewHistory | Export-Clixml ($HistoryDirPath + $HistoryFileName)
+        }
+    } -SupportEvent
+
+if (Test-path ($HistoryDirPath + $HistoryFileName))
+    {
+        Import-Clixml ($HistoryDirPath + $HistoryFileName) | ? {$count++;$true} |Add-History
+     Write-Host -Fore Green "`nLoaded $count history item(s).`n"
+     $ImportedHistoryCount = $count
+    }
+
+# hg function to search history
+function hg($arg) {
+    Get-History -c $MaximumHistoryCount | out-string -stream |
+    select-string $arg
+    }
+
+
+Import-Module PSReadLine
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 cd ~
 
