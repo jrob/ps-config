@@ -15,7 +15,7 @@ else
     Import-Module "$pscx\pscx.psd1" -arg "$scripts\powershell\Pscx.UserPreferences.ps1"
 }
 
-Import-Module "$scripts\powershell\posh-git"
+Import-Module Posh-Git
 
 #$e=Get-Date; ($e - $s).TotalSeconds
 
