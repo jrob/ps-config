@@ -1,8 +1,6 @@
-function Installs-01
+function Choco-Installs
 {
     # system
-    choco install -y powershell4
-    choco install -y pscx
     choco install -y conemu
 
     # Web
@@ -18,8 +16,6 @@ function Installs-01
     choco install -y autohotkey
     choco install -y f.lux
     choco install -y spacesniffer
-    #choco install -y syncback
-    choco install -y freefilesync
     choco install -y mousewithoutborders
 
     # apps
@@ -41,19 +37,24 @@ function Installs-01
 
     #frameworks
     choco install -y -x86 mingw
-    # fix path to point to mingw32
+    .\Remove-PathFolders.ps1 C:\tools\mingw64\bin user
+    .\Add-PathFolders.ps1 C:\tools\mingw32\bin user
 
     choco install -y StrawberryPerl
-    # remove C:\strawberry\c\bin; from path
+    .\Remove-PathFolders.ps1 C:\strawberry\c\bin machine
+
+    choco install -y jre8
 
     choco install -y python
-    chcoc install -y jre8
+    .\Add-PathFolders.ps1 C:\tools\python process
 
-    choco install -y easy.install
+    echoco install -y easy.install
+    .\Add-PathFolders.ps1 C:\tools\python\Scripts process
+    
     choco install -y pip
 }
 
-function Installs-04
+function Manual-Installs
 {
     # Bitvise Ssh Server
     if ((test-path d:\installers\BvSshServer-Inst.exe) -eq $false)
@@ -87,7 +88,7 @@ function Installs-04
     {
         Invoke-WebRequest https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi -outfile d:\installers\pandoc-1.13.2-windows.msi
     }
-    d:\installers\pandoc-1.13.2-windows.msi d:\
+    d:\installers\pandoc-1.13.2-windows.msi /quiet
 }
 
 function Git-Clones
@@ -104,12 +105,12 @@ function Create-Profiles
 {
     # Powershell Profile
     $profilecontent = @'
-$scripts = "~\scripts"
+$scripts = "$env:homedrive$env:homepath\scripts"
 $usepscx3 = $True
 . "$scripts\PowerShell\profile.ps1"
 '@
-    mkdir -Path ~\Documents\WindowsPowerShell
-    $profilecontent | Out-File ~\Documents\WindowsPowerShell\Profile.ps1
+    mkdir -Path ~\Documents\WindowsPowerShell -Force
+    $profilecontent | Out-File $profile -Force
 
     # Vim Profile
     $homeesc = $home.replace("\","\\")
@@ -137,7 +138,7 @@ function Git-Config
     #reviewboard.url=https://manager.petnetsolutions.net/sd/rb/
 }
 
-function Setup-Installers
+function Setup-Cli-Installers
 {
     iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
     (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
@@ -173,6 +174,8 @@ function Get-Consolas
 
 function Prep-Powershell
 {
+    choco install -y powershell4
+    choco install -y pscx
     Install-Module PSReadline
     Install-Module Posh-Git
 }
@@ -196,50 +199,30 @@ function Fix-Choco-Config
     Replace-In-File  $file $before $after
 }
 
-function Cleanup-Paths
+function Prep-Git
 {
-    Write-Output "user paths before:"
-    .\Get-PathFolders.ps1 user
-    Write-Output ""
-    Write-Output "machine paths before:"
-    .\Get-PathFolders.ps1 machine
-    Write-Output ""
-
-    .\Remove-PathFolders.ps1 C:\strawberry\c\bin machine
-    .\Remove-PathFolders.ps1 C:\tools\mingw64\bin user
-    .\Add-PathFolders.ps1 C:\tools\mingw32\bin user
-
-    Write-Output "user paths after:"
-    .\Get-PathFolders.ps1 user
-    Write-Output ""
-    Write-Output "machine paths after:"
-    .\Get-PathFolders.ps1 machine
-    Write-Output ""
-
+    choco install -y git
+    .\Add-PathFolders.ps1 "C:\Program Files (x86)\Git\cmd" process
+    Git-Config
 }
 
 function phase1
 {
-    Setup-Installers
+    Setup-Cli-Installers
     Fix-Choco-Config
-    choco install -y git
     Prep-Powershell
+    Prep-Git
+    Git-Clones
+    Create-Profiles
+    cmd /c mklink %appdata%\ConEmu.xml %homedrive%%homepath%\Scripts\Powershell\ConEmu.xml    
 }
 
 function phase2
 {
-    Installs-01
+    Choco-Installs
     Cleanup-Paths
-    Installs-04
+    Manual-Installs
     Get-Consolas
-}
-
-function phase3
-{
-    Git-Clones
-    Git-Config
-    Create-Profiles
-    cmd /c mklink %appdata%\ConEmu.xml %homedrive%%homepath%\Scripts\Powershell\ConEmu.xml
 }
 
 pushd d:\
@@ -248,15 +231,12 @@ pushd d:\
 #Set-ExecutionPolicy RemoteSigned -force
 
 #phase1
-# Close and reopen Powershell
-
 phase2
-#Restart-Computer
-
-#phase3
 
 #& cipher.exe /e D:\crypto-test\
 #& cipher.exe /x:D:\crypto-test\ d:\efs.key
 #& certutil -f -p password -importpfx D:\efs.password.PFX
+
+#rm C:\Users\jrob\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 
 popd
