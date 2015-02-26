@@ -73,13 +73,6 @@ function Manual-Installs
     }
     d:\installers\BvSshClient-Inst.exe -acceptEula -noDesktopIcon -installDir="${env:ProgramFiles(x86)}\Bitvise SSH Client"
 
-    # Vim Cream
-    if ((test-path d:\installers\gvim-7-4-423.exe) -eq $false)
-    {
-        Invoke-WebRequest http://superb-dca2.dl.sourceforge.net/project/cream/Vim/7.4.423/gvim-7-4-423.exe -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox -outfile d:\installers\gvim-7-4-423.exe
-    }
-    d:\installers\gvim-7-4-423.exe /S
-
     if ((test-path d:\installers\pandoc-1.13.2-windows.msi) -eq $false)
     {
         Invoke-WebRequest https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi -outfile d:\installers\pandoc-1.13.2-windows.msi
@@ -166,6 +159,16 @@ function Get-Consolas
         }
         Add-Font d:\installers\$font
     }
+}
+
+function Install-Vim
+{
+    # Vim Cream
+    if ((test-path d:\installers\gvim-7-4-423.exe) -eq $false)
+    {
+        Invoke-WebRequest http://superb-dca2.dl.sourceforge.net/project/cream/Vim/7.4.423/gvim-7-4-423.exe -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox -outfile d:\installers\gvim-7-4-423.exe
+    }
+    d:\installers\gvim-7-4-423.exe /S
 }
 
 function Prep-Powershell
