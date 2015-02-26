@@ -73,6 +73,11 @@ function Manual-Installs
     }
     d:\installers\BvSshClient-Inst.exe -acceptEula -noDesktopIcon -installDir="${env:ProgramFiles(x86)}\Bitvise SSH Client"
 
+    if (Test-Path d:\installers\MinecraftInstaller.msi)
+    {
+        d:\installers\MinecraftInstaller.msi /quiet
+    }
+
     if ((test-path d:\installers\pandoc-1.13.2-windows.msi) -eq $false)
     {
         Invoke-WebRequest https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi -outfile d:\installers\pandoc-1.13.2-windows.msi
