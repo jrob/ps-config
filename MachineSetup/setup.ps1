@@ -80,12 +80,6 @@ function Manual-Installs
     }
     d:\installers\gvim-7-4-423.exe /S
 
-    # Free file sync
-    if (Test-Path d:\installers\FreeFileSync_6.14_Windows_Setup.exe)
-    {
-        d:\installers\FreeFileSync_6.14_Windows_Setup.exe /S /D="$env:ProgramFiles\FreeFileSync"
-    }
-
     if ((test-path d:\installers\pandoc-1.13.2-windows.msi) -eq $false)
     {
         Invoke-WebRequest https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi -outfile d:\installers\pandoc-1.13.2-windows.msi
