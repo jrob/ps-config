@@ -50,7 +50,7 @@ function Choco-Installs
     choco install -y python
     .\Add-PathFolders.ps1 C:\tools\python process
 
-    echoco install -y easy.install
+    choco install -y easy.install
     .\Add-PathFolders.ps1 C:\tools\python\Scripts process
     
     choco install -y pip
