@@ -17,12 +17,14 @@ function Choco-Installs
     choco install -y f.lux
     choco install -y spacesniffer
     choco install -y mousewithoutborders
+    choco install -y teamspeak
 
     # apps
     choco install -y keepass
     choco install -y dropbox
     choco install -y evernote
     choco install -y linqpad4
+    choco install -y picasa
 
     # Dev
     choco install -y gitextensions
