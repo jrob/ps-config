@@ -235,3 +235,6 @@ function Setup-Basic
     Install-Vim
     Get-Consolas
 }
+
+# Manual steps
+# run bootstrap
