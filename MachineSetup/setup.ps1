@@ -1,7 +1,6 @@
 function Choco-Installs
 {
     # system
-    choco install -y conemu
 
     # Web
     choco install -y firefox
