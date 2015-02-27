@@ -218,6 +218,13 @@ function Enable-Task-Scheduler-History
     $log.SaveChanges()
 }
 
+function Setup-Bin-Folder
+{
+    mkdir "$home/bin" -Force
+    & $env:USERPROFILE\Scripts\Powershell\Add-PathFolders.ps1 "$($env:USERPROFILE)\bin" process
+    & $env:USERPROFILE\Scripts\Powershell\Add-PathFolders.ps1 "$($env:USERPROFILE)\bin" user
+}
+
 function phase2
 {
     Choco-Installs
@@ -234,6 +241,7 @@ function Setup-Basic
     Prep-Conemu
     Install-Vim
     Get-Consolas
+    Setup-Bin-Folder
 }
 
 # Manual steps
