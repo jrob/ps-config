@@ -88,7 +88,6 @@ function Manual-Installs
 function Git-Clones
 {
     # clone relevant repositories
-    git clone https://github.com/jrob/ps-config.git "$home\Scripts\Powershell"
     git clone https://github.com/jrob/vim-config.git "$home\vim"
     git clone https://github.com/bbusschots/xkpasswd.pm.git "$home\Scripts\Perl\xkpasswd"
     mkdir -Path $home/.vim/bundle
