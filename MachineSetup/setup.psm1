@@ -51,16 +51,19 @@ function Choco-Installs
     choco install -y pip
 }
 
-function Manual-Installs
+function Install-BitviseSshServer($settings, $activationCode)
 {
     # Bitvise Ssh Server
     if ((test-path d:\installers\BvSshServer-Inst.exe) -eq $false)
     {
         Invoke-WebRequest http://dl.bitvise.com/BvSshServer-Inst.exe -OutFile d:\installers\BvSshServer-Inst.exe
     }
-    d:\installers\BvSshServer-Inst.exe -acceptEULA -defaultSite
+    d:\installers\BvSshServer-Inst.exe -acceptEULA -defaultSite -settings="$settings" -activationCode="$activationCode"
     net start BvSshServer
+}
 
+function Manual-Installs
+{
     # Bitvise Ssh Client
     if ((test-path d:\installers\BvSshClient-Inst.exe) -eq $false)
     {
