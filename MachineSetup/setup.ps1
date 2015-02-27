@@ -198,6 +198,12 @@ function Fix-Choco-Config
     Replace-In-File  $file $before $after
 }
 
+function Prep-Conemu
+{
+    choco install -y conemu
+    cmd /c mklink %appdata%\ConEmu.xml %homedrive%%homepath%\Scripts\Powershell\ConEmu.xml
+}
+
 function Prep-Git
 {
     choco install -y git
