@@ -72,16 +72,23 @@ function Manual-Installs
     }
     d:\installers\BvSshClient-Inst.exe -acceptEula -noDesktopIcon -installDir="${env:ProgramFiles(x86)}\Bitvise SSH Client"
 
-    if (Test-Path d:\installers\MinecraftInstaller.msi)
-    {
-        d:\installers\MinecraftInstaller.msi /quiet
-    }
-
     if ((test-path d:\installers\pandoc-1.13.2-windows.msi) -eq $false)
     {
         Invoke-WebRequest https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi -outfile d:\installers\pandoc-1.13.2-windows.msi
     }
     d:\installers\pandoc-1.13.2-windows.msi /quiet
+}
+
+function Install-Minecraft
+{
+    $file = d:\installers\MinecraftInstaller.msi
+    if (Test-Path $file) { & $file /quiet }
+
+    $file = D:\installers\TechnicLauncher.exe
+    if (Test-Path $file) { cp $file  $env:USERPROFILE\desktop }
+
+    $file = D:\installers\FTB_Launcher.exe
+    if (Test-Path $file) { cp $file  $env:USERPROFILE\desktop }
 }
 
 function Git-Clones
