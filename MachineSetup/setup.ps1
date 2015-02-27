@@ -132,12 +132,6 @@ function Git-Config
     #reviewboard.url=https://manager.petnetsolutions.net/sd/rb/
 }
 
-function Setup-Cli-Installers
-{
-    iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
-    (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
-}
-
 function Add-Font($fontpath)
 {
     # http://stackoverflow.com/questions/16023238/installing-system-font-with-powershell
@@ -180,6 +174,7 @@ function Prep-Powershell
 {
     choco install -y powershell4
     choco install -y pscx
+    (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
     Install-Module PSReadline
     Install-Module Posh-Git
 }
