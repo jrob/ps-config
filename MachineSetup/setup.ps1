@@ -210,6 +210,15 @@ function Prep-Git
     Git-Config
 }
 
+function Enable-Task-Scheduler-History
+{
+    #http://stackoverflow.com/questions/23227964/how-can-i-enable-all-tasks-history-in-powershell
+    $logName = 'Microsoft-Windows-TaskScheduler/Operational'
+    $log = New-Object System.Diagnostics.Eventing.Reader.EventLogConfiguration $logName
+    $log.IsEnabled=$true
+    $log.SaveChanges()
+}
+
 function phase1
 {
     Setup-Cli-Installers
