@@ -38,19 +38,19 @@ function Choco-Installs
 
     #frameworks
     choco install -y -x86 mingw
-    .\Remove-PathFolders.ps1 C:\tools\mingw64\bin user
-    .\Add-PathFolders.ps1 C:\tools\mingw32\bin user
+    Remove-PathFolders.ps1 C:\tools\mingw64\bin user
+    Add-PathFolders.ps1 C:\tools\mingw32\bin user
 
     choco install -y StrawberryPerl
-    .\Remove-PathFolders.ps1 C:\strawberry\c\bin machine
+    Remove-PathFolders.ps1 C:\strawberry\c\bin machine
 
     choco install -y jre8
 
     choco install -y python
-    .\Add-PathFolders.ps1 C:\tools\python process
+    Add-PathFolders.ps1 C:\tools\python process
 
     choco install -y easy.install
-    .\Add-PathFolders.ps1 C:\tools\python\Scripts process
+    Add-PathFolders.ps1 C:\tools\python\Scripts process
 
     choco install -y pip
 }
@@ -223,6 +223,9 @@ function Setup-Bin-Folder
     mkdir "$home/bin" -Force
     & $env:USERPROFILE\Scripts\Powershell\Add-PathFolders.ps1 "$($env:USERPROFILE)\bin" process
     & $env:USERPROFILE\Scripts\Powershell\Add-PathFolders.ps1 "$($env:USERPROFILE)\bin" user
+    cmd /c mklink "%USERPROFILE%\bin\Add-PathFolders.ps1" "%USERPROFILE%\Scripts\Powershell\Add-PathFolders.ps1"
+    cmd /c mklink "%USERPROFILE%\bin\Get-PathFolders.ps1" "%USERPROFILE%\Scripts\Powershell\Get-PathFolders.ps1"
+    cmd /c mklink "%USERPROFILE%\bin\Remove-PathFolders.ps1" "%USERPROFILE%\Scripts\Powershell\Remove-PathFolders.ps1"
 }
 
 function phase2
