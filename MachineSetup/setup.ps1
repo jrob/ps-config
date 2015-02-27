@@ -231,16 +231,5 @@ function Setup-Basic
 
 pushd d:\
 
-# Manual step
-#Set-ExecutionPolicy RemoteSigned -force
-
-#phase1
-phase2
-
-#& cipher.exe /e D:\crypto-test\
-#& cipher.exe /x:D:\crypto-test\ d:\efs.key
-#& certutil -f -p password -importpfx D:\efs.password.PFX
-
-#rm C:\Users\jrob\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 
 popd
