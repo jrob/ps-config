@@ -228,8 +228,3 @@ function Setup-Basic
     Install-Vim
     Get-Consolas
 }
-
-pushd d:\
-
-
-popd
