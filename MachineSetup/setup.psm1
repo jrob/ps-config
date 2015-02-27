@@ -37,10 +37,6 @@ function Choco-Installs
     #choco install resharper
 
     #frameworks
-    choco install -y -x86 mingw
-    Remove-PathFolders.ps1 C:\tools\mingw64\bin user
-    Add-PathFolders.ps1 C:\tools\mingw32\bin user
-
     choco install -y StrawberryPerl
     Remove-PathFolders.ps1 C:\strawberry\c\bin machine
 
@@ -167,6 +163,10 @@ function Get-Consolas
 
 function Install-Vim
 {
+    choco install -y -x86 mingw
+    Remove-PathFolders.ps1 C:\tools\mingw64\bin user
+    Add-PathFolders.ps1 C:\tools\mingw32\bin user
+
     # Vim Cream
     if ((test-path d:\installers\gvim-7-4-423.exe) -eq $false)
     {
@@ -239,12 +239,12 @@ function Setup-Basic
     Fix-Choco-Config
     Git-Config
     Git-Clones
+    Setup-Bin-Folder
     Prep-Powershell
     Create-Profiles
     Prep-Conemu
     Install-Vim
     Get-Consolas
-    Setup-Bin-Folder
 }
 
 # Manual steps
