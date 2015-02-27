@@ -202,13 +202,6 @@ function Prep-Conemu
     cmd /c mklink %appdata%\ConEmu.xml %homedrive%%homepath%\Scripts\Powershell\ConEmu.xml
 }
 
-function Prep-Git
-{
-    choco install -y git
-    .\Add-PathFolders.ps1 "C:\Program Files (x86)\Git\cmd" process
-    Git-Config
-}
-
 function Enable-Task-Scheduler-History
 {
     #http://stackoverflow.com/questions/23227964/how-can-i-enable-all-tasks-history-in-powershell
@@ -218,22 +211,21 @@ function Enable-Task-Scheduler-History
     $log.SaveChanges()
 }
 
-function phase1
-{
-    Setup-Cli-Installers
-    Fix-Choco-Config
-    Prep-Powershell
-    Prep-Git
-    Git-Clones
-    Create-Profiles
-    cmd /c mklink %appdata%\ConEmu.xml %homedrive%%homepath%\Scripts\Powershell\ConEmu.xml    
-}
-
 function phase2
 {
     Choco-Installs
-    Cleanup-Paths
     Manual-Installs
+}
+
+function Setup-Basic
+{
+    Fix-Choco-Config
+    Git-Config
+    Git-Clones
+    Prep-Powershell
+    Create-Profiles
+    Prep-Conemu
+    Install-Vim
     Get-Consolas
 }
 
