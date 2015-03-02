@@ -1,6 +1,6 @@
 function Choco-Installs
 {
-    # system
+    choco install -y git-credential-winstore
 
     # Web
     choco install -y firefox
