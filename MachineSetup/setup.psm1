@@ -55,11 +55,18 @@ function Choco-Installs
 function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
 {
     # Bitvise Ssh Server
-    if ((test-path d:\installers\BvSshServer-Inst.exe) -eq $false)
+    $file = "d:\installers\BvSshServer-Inst.exe"
+    $url = "http://dl.bitvise.com/BvSshServer-Inst.exe"
+    $arglist = @("-acceptEULA", "-defaultSite")
+    $arglist += "-settings=""$settings"""
+    $arglist += "-activationCode=""$activationCode"""
+    $arglist += "-keypairs=""$keypairFile"""
+
+    if ((test-path $file) -eq $false)
     {
-        Invoke-WebRequest http://dl.bitvise.com/BvSshServer-Inst.exe -OutFile d:\installers\BvSshServer-Inst.exe
+        Invoke-WebRequest $url -OutFile $file
     }
-    d:\installers\BvSshServer-Inst.exe -acceptEULA -defaultSite -settings="$settings" -activationCode="$activationCode" -keypairs="$keypairFile"
+    & $file $arglist
     net start BvSshServer
 }
 
