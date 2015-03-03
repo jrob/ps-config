@@ -99,7 +99,7 @@ function Manual-Installs
 
     # Download and extract the ISO.
     # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=57396
-    D:\installers\office2013\setup.exe /config $env:USERPROFILE\scripts\powershell\Office2013_config.xml
+    D:\installers\office2013\setup.exe /config "$env:USERPROFILE\scripts\powershell\Office2013_config.xml"
 }
 
 function Install-Minecraft
