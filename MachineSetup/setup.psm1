@@ -84,6 +84,10 @@ function Manual-Installs
         Invoke-WebRequest https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi -outfile d:\installers\pandoc-1.13.2-windows.msi
     }
     d:\installers\pandoc-1.13.2-windows.msi /quiet
+
+    # Download and extract the ISO.
+    # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=59476
+    D:\installers\office2013\setup.exe /config $env:USERPROFILE\scripts\powershell\Office2013_config.xml
 }
 
 function Install-Minecraft
