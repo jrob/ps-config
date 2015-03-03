@@ -103,6 +103,7 @@ function Manual-Installs
 
     # VS2013 update 4
     # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=61638
+    # & 'D:\installers\vs2013UltUpdate4\vs_ultimate.exe' /Quiet /Passive /Log "$env:USERPROFILE\vs2013install.log"
 }
 
 function Install-Minecraft
