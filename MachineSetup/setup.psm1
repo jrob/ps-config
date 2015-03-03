@@ -62,11 +62,8 @@ function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
     if ($activationCode) { $arglist += "-activationCode=""$activationCode""" }
     if ($keypairFile) { $arglist += "-keypairs=""$keypairFile""" }
 
-    if ((test-path $file) -eq $false)
-    {
-        Invoke-WebRequest $url -OutFile $file
-    }
-    & $file $arglist
+    Download-Install $file $url $arglist
+
     net start BvSshServer
 }
 
