@@ -92,10 +92,10 @@ function Install-Minecraft
     if (Test-Path $file) { & $file /quiet }
 
     $file = "D:\installers\TechnicLauncher.exe"
-    if (Test-Path $file) { cp $file  $env:USERPROFILE\desktop }
+    if (Test-Path $file) { cp $file $env:USERPROFILE\desktop }
 
     $file = "D:\installers\FTB_Launcher.exe"
-    if (Test-Path $file) { cp $file  $env:USERPROFILE\desktop }
+    if (Test-Path $file) { cp $file $env:USERPROFILE\desktop }
 }
 
 function Git-Clones
