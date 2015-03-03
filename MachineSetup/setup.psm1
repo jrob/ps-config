@@ -70,6 +70,19 @@ function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
     net start BvSshServer
 }
 
+function Download-Install($file, $url, $arglist)
+{
+    $useragent = "[Microsoft.PowerShell.Commands.PSUserAgent]::FireFox"
+    if ((test-path $file) -eq $false)
+    {
+        Invoke-WebRequest $url $useragent -OutFile $file
+    }
+    if (Test-Path $file)
+    {
+        & $file $arglist
+    }
+}
+
 function Manual-Installs
 {
     # Bitvise Ssh Client
