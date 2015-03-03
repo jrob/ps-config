@@ -100,6 +100,9 @@ function Manual-Installs
     # Download and extract the ISO.
     # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=57396
     D:\installers\office2013\setup.exe /config "$env:USERPROFILE\scripts\powershell\Office2013_config.xml"
+
+    # VS2013 update 4
+    # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=61638
 }
 
 function Install-Minecraft
