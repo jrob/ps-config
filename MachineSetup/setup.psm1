@@ -58,9 +58,9 @@ function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
     $file = "d:\installers\BvSshServer-Inst.exe"
     $url = "http://dl.bitvise.com/BvSshServer-Inst.exe"
     $arglist = @("-acceptEULA", "-defaultSite")
-    $arglist += "-settings=""$settings"""
-    $arglist += "-activationCode=""$activationCode"""
-    $arglist += "-keypairs=""$keypairFile"""
+    if ($settings) { $arglist += "-settings=""$settings""" }
+    if ($activationCode) { $arglist += "-activationCode=""$activationCode""" }
+    if ($keypairFile) { $arglist += "-keypairs=""$keypairFile""" }
 
     if ((test-path $file) -eq $false)
     {
