@@ -139,6 +139,7 @@ function Git-Config
     git config --global user.name "Jeremy Roberts"          # Name
     git config --global user.email jeremy@robertsisland.com # Email
     git config --global branch.autosetuprebase always       # Force all new branches to automatically use rebase
+    git config --global push.default simple
     #merge.tool=BeyondCompare3
     #difftool.BeyondCompare3.path=C:/Program Files (x86)/Beyond Compare 3/bcomp.exe
     #difftool.beyondcompare3.path=C:/Program Files (x86)/Beyond Compare 3/bcomp.exe
