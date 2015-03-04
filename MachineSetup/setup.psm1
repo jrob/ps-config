@@ -103,10 +103,10 @@ function Install-Studio
 
 function Download-Install($file, $url, $arglist)
 {
-    $useragent = "[Microsoft.PowerShell.Commands.PSUserAgent]::FireFox"
-    if ((test-path $file) -eq $false)
+    $useragent = [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+    if ((test-path $file) -eq $false -and $url)
     {
-        Invoke-WebRequest $url $useragent -OutFile $file
+        Invoke-WebRequest $url -UserAgent $useragent -OutFile $file
     }
     if (Test-Path $file)
     {
