@@ -101,6 +101,14 @@ function Install-Studio
     Download-Install $file "" $arglist
 }
 
+function Install-ComicRack
+{
+    $url = "http://comicrack.cyolito.com/downloads/comicrack/func-download/131/chk,ea95a6e77aa9fc1cebadf75bfe77d009/no_html,1/"
+    $file = "D:\installers\ComicRackSetup09176.exe"
+    $arglist = @("/?")
+    Download-Install $file $url $arglist
+}
+
 function Download-Install($file, $url, $arglist)
 {
     $useragent = [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
@@ -112,11 +120,6 @@ function Download-Install($file, $url, $arglist)
     {
         Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
     }
-}
-
-function Manual-Installs
-{
-    # http://comicrack.cyolito.com/downloads/comicrack/ComicRack/ComicRackSetup09176.exe/
 }
 
 function Install-Minecraft
