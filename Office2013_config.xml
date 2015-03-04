@@ -8,7 +8,7 @@ Notes: Enter your comments here...
 **************************************************-->
 
 <Configuration>
-    <Display Level="Basic" CompletionNotice="Yes" SuppressModal="Yes" AcceptEula="Yes" />
+    <Display Level="Basic" CompletionNotice="No" SuppressModal="Yes" AcceptEula="Yes" />
     <USERNAME Value="Jeremy Roberts" />
     <USERINITIALS Value="JR" />
     <COMPANYNAME Value="" />
