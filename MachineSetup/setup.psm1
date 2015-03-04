@@ -70,7 +70,6 @@ function Install-BitviseSshClient()
     $file = "d:\installers\BvSshClient-Inst.exe"
     $url = "http://dl.bitvise.com/BvSshClient-Inst.exe"
     $arglist = @("-acceptEULA", "-noDesktopIcon", "-installDir=""${env:ProgramFiles(x86)}\Bitvise SSH Client""" )
-    Write-Host $arglist
     Download-Install $file $url $arglist
 }
 
