@@ -81,6 +81,26 @@ function Install-Pandoc()
     Download-Install $file $url $arglist
 }
 
+function Install-Office
+{
+    # Download and extract the ISO.
+    # Office 2013 Pro Plus with Sp1
+    # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=57396
+    $file = "D:\installers\office2013\setup.exe"
+    $arglist = @("/config", """$env:USERPROFILE\scripts\powershell\Office2013_config.xml""")
+    Download-Install $file "" $arglist
+}
+
+function Install-Studio
+{
+    # Download and extract the ISO.
+    # Visual Studio 2013 udpate 4
+    # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=61638
+    $file = "D:\installers\vs2013UltUpdate4\vs_ultimate.exe"
+    $arglist = @("/Quiet", "/Passive", "/Log", """$env:USERPROFILE\vs2013install.log""")
+    Download-Install $file "" $arglist
+}
+
 function Download-Install($file, $url, $arglist)
 {
     $useragent = "[Microsoft.PowerShell.Commands.PSUserAgent]::FireFox"
@@ -97,14 +117,6 @@ function Download-Install($file, $url, $arglist)
 function Manual-Installs
 {
     # http://comicrack.cyolito.com/downloads/comicrack/ComicRack/ComicRackSetup09176.exe/
-
-    # Download and extract the ISO.
-    # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=57396
-    D:\installers\office2013\setup.exe /config "$env:USERPROFILE\scripts\powershell\Office2013_config.xml"
-
-    # VS2013 update 4
-    # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=61638
-    # & 'D:\installers\vs2013UltUpdate4\vs_ultimate.exe' /Quiet /Passive /Log "$env:USERPROFILE\vs2013install.log"
 }
 
 function Install-Minecraft
