@@ -103,7 +103,7 @@ function Install-Studio
     # Visual Studio 2013 udpate 4
     # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=61638
     $file = "D:\installers\vs2013UltUpdate4\vs_ultimate.exe"
-    $arglist = @("/Quiet", "/Passive", "/Log", """$env:USERPROFILE\vs2013install.log""")
+    $arglist = @("/Quiet", "/Passive", "/Log", """$env:USERPROFILE\Logs\vs2013\vs2013install.log""")
     Download-Install $file "" $arglist
 }
 
