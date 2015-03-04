@@ -115,13 +115,18 @@ function Install-ComicRack
     Download-Install $file $url $arglist
 }
 
-function Download-Install($file, $url, $arglist)
+function Download-File($file, $url)
 {
     $useragent = [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
     if ((test-path $file) -eq $false -and $url)
     {
         Invoke-WebRequest $url -UserAgent $useragent -OutFile $file
     }
+}
+
+function Download-Install($file, $url, $arglist)
+{
+    Download-File $file $url
     if (Test-Path $file)
     {
         Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
