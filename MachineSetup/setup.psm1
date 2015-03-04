@@ -67,6 +67,15 @@ function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
     net start BvSshServer
 }
 
+function Install-BitviseSshClient()
+{
+    $file = "d:\installers\BvSshClient-Inst.exe"
+    $url = "http://dl.bitvise.com/BvSshClient-Inst.exe"
+    $arglist = @("-acceptEULA", "-noDesktopIcon", "-installDir=""${env:ProgramFiles(x86)}\Bitvise SSH Client""" )
+    Write-Host $arglist
+    Download-Install $file $url $arglist
+}
+
 function Download-Install($file, $url, $arglist)
 {
     $useragent = "[Microsoft.PowerShell.Commands.PSUserAgent]::FireFox"
@@ -82,13 +91,6 @@ function Download-Install($file, $url, $arglist)
 
 function Manual-Installs
 {
-    # Bitvise Ssh Client
-    if ((test-path d:\installers\BvSshClient-Inst.exe) -eq $false)
-    {
-        Invoke-WebRequest http://dl.bitvise.com/BvSshClient-Inst.exe -OutFile d:\installers\BvSshClient-Inst.exe
-    }
-    d:\installers\BvSshClient-Inst.exe -acceptEula -noDesktopIcon -installDir="${env:ProgramFiles(x86)}\Bitvise SSH Client"
-
     if ((test-path d:\installers\pandoc-1.13.2-windows.msi) -eq $false)
     {
         Invoke-WebRequest https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi -outfile d:\installers\pandoc-1.13.2-windows.msi
