@@ -74,6 +74,14 @@ function Install-BitviseSshClient()
     Download-Install $file $url $arglist
 }
 
+function Install-Pandoc()
+{
+    $file = "d:\installers\pandoc-1.13.2-windows.msi"
+    $url = "https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi"
+    $arglist = @("/quiet")
+    Download-Install $file $url $arglist
+}
+
 function Download-Install($file, $url, $arglist)
 {
     $useragent = "[Microsoft.PowerShell.Commands.PSUserAgent]::FireFox"
@@ -89,12 +97,6 @@ function Download-Install($file, $url, $arglist)
 
 function Manual-Installs
 {
-    if ((test-path d:\installers\pandoc-1.13.2-windows.msi) -eq $false)
-    {
-        Invoke-WebRequest https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi -outfile d:\installers\pandoc-1.13.2-windows.msi
-    }
-    d:\installers\pandoc-1.13.2-windows.msi /quiet
-
     # http://comicrack.cyolito.com/downloads/comicrack/ComicRack/ComicRackSetup09176.exe/
 
     # Download and extract the ISO.
