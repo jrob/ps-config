@@ -71,7 +71,7 @@ function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
     net start BvSshServer
 }
 
-function Install-BitviseSshClient()
+function Install-BitviseSshClient
 {
     $file = "d:\installers\BvSshClient-Inst.exe"
     $url = "http://dl.bitvise.com/BvSshClient-Inst.exe"
@@ -79,7 +79,7 @@ function Install-BitviseSshClient()
     Download-Install $file $url $arglist
 }
 
-function Install-Pandoc()
+function Install-Pandoc
 {
     $file = "d:\installers\pandoc-1.13.2-windows.msi"
     $url = "https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi"
