@@ -2,6 +2,7 @@ function Choco-Installs
 {
     choco install -y git-credential-winstore
     choco install -y anki
+    choco install -y nssm
 
     # Web
     choco install -y firefox
