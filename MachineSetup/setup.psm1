@@ -52,6 +52,12 @@ function Choco-Installs
     choco install -y pip
 }
 
+Custom-Installs
+{
+    Install-Pandoc
+    Install-BitviseSshClient
+}
+
 function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
 {
     $file = "d:\installers\BvSshServer-Inst.exe"
