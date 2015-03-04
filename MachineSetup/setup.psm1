@@ -76,7 +76,7 @@ function Download-Install($file, $url, $arglist)
     }
     if (Test-Path $file)
     {
-        & $file $arglist
+        Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
     }
 }
 
