@@ -59,6 +59,11 @@ function Custom-Installs
     Install-BitviseSshClient
 }
 
+function Enable-Net35
+{
+    DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:D:\installers\35netsp1sources
+}
+
 function Install-VsExtensions
 {
     $url = "https://visualstudiogallery.msdn.microsoft.com/76293c4d-8c16-4f4a-aee6-21f83a571496/file/9356/29/CodeMaid_v0.7.5.vsix"
