@@ -52,7 +52,7 @@ function Choco-Installs
     choco install -y pip
 }
 
-Custom-Installs
+function Custom-Installs
 {
     Install-Pandoc
     Install-BitviseSshClient
