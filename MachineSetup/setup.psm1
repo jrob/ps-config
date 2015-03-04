@@ -58,6 +58,29 @@ function Custom-Installs
     Install-BitviseSshClient
 }
 
+function Install-VsExtensions
+{
+    $url = "https://visualstudiogallery.msdn.microsoft.com/76293c4d-8c16-4f4a-aee6-21f83a571496/file/9356/29/CodeMaid_v0.7.5.vsix"
+    $file = "d:\Installers\CodeMaid_v0.7.5.vsix"
+    Download-File $file $url
+    & "$env:VS120COMNTOOLS\..\IDE\VSIXInstaller.exe" /q $file
+
+    $url = "https://visualstudiogallery.msdn.microsoft.com/59ca71b3-a4a3-46ca-8fe1-0e90e3f79329/file/6390/55/VsVim.vsix"
+    $file = "d:\Installers\VsVim.vsix"
+    Download-File $file $url
+    & "$env:VS120COMNTOOLS\..\IDE\VSIXInstaller.exe" /q $file
+
+    $url = "https://visualstudiogallery.msdn.microsoft.com/3de2a3c6-def5-42c4-924d-cc13a29ff5b7/file/124126/12/XamlStyler.Package.vsix"
+    $file = "D:\Installers\XamlStyler.Package.vsix"
+    Download-File $file $url
+    & "$env:VS120COMNTOOLS\..\IDE\VSIXInstaller.exe" /q $file
+
+    $url = "https://visualstudiogallery.msdn.microsoft.com/74d68e2b-ff64-4c51-a2ed-d8b164eee858/file/96667/6/RelativeLineNumbers.vsix"
+    $file = "D:\Installers\RelativeLineNumbers.vsix"
+    Download-File $file $url
+    & "$env:VS120COMNTOOLS\..\IDE\VSIXInstaller.exe" /q $file
+}
+
 function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
 {
     $file = "d:\installers\BvSshServer-Inst.exe"
