@@ -58,6 +58,7 @@ function Custom-Installs
     Install-Pandoc
     Install-BitviseSshClient
     Install-LiveMeeting
+    Enable-Net35
 }
 
 function Enable-Net35
