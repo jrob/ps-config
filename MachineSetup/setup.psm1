@@ -57,6 +57,7 @@ function Custom-Installs
 {
     Install-Pandoc
     Install-BitviseSshClient
+    Install-LiveMeeting
 }
 
 function Enable-Net35
@@ -136,6 +137,12 @@ function Install-Studio
     Download-Install $file "" $arglist
 }
 
+function Install-LiveMeeting
+{
+    # https://technet.microsoft.com/en-us/library/bb663674(v=office.12).aspx
+    # LMSetup.exe -out <drive>:\<folder path>
+    msiexec /qn /I "D:\Installers\LMConsole.msi"
+}
 function Install-ComicRack
 {
     $url = "http://comicrack.cyolito.com/downloads/comicrack/func-download/131/chk,ea95a6e77aa9fc1cebadf75bfe77d009/no_html,1/"
