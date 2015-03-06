@@ -116,7 +116,8 @@ function Install-Pandoc
     Write-Host "Install Pandoc"
     $url = "https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi"
     $arglist = @("/quiet")
-    Download-Install $file $url $arglist
+    Download-File $file $url
+    & $file $arglist
     Write-Host "Pandoc Complete"
 }
 
