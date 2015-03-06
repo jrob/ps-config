@@ -113,9 +113,11 @@ function Install-BitviseSshClient
 function Install-Pandoc
 {
     $file = "d:\installers\pandoc-1.13.2-windows.msi"
+    Write-Host "Install Pandoc"
     $url = "https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi"
     $arglist = @("/quiet")
     Download-Install $file $url $arglist
+    Write-Host "Pandoc Complete"
 }
 
 function Install-Office
