@@ -164,8 +164,8 @@ function Install-ComicRack
 function Install-LightRoom
 {
     $file = "D:\installers\lightroom_5_ccm\Adobe_Lightroom_x64.msi"
-    $arglist = @("/passive")
-    & $file $arglist
+    $arglist = @("/i", $file, "/passive")
+    Start-Process  -FilePath msiexec -ArgumentList $arglist -Wait
 }
 
 function Download-File($file, $url)
