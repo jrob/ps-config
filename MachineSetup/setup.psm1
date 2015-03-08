@@ -30,8 +30,6 @@ function Choco-Installs
     # Dev
     choco install -y gitextensions
     choco install -y virtualbox
-    Add-PathFolders.ps1 "C:\PROGRA~2\Oracle\VirtualBox" process
-    choco install -y VirtualBox.ExtensionPack
     choco install -y vagrant
     choco install -y packer
     choco install -y beyondcompare
@@ -52,6 +50,10 @@ function Choco-Installs
     Add-PathFolders.ps1 C:\tools\python\Scripts process
 
     choco install -y pip
+
+    Add-PathFolders.ps1 "C:\PROGRA~2\Oracle\VirtualBox" process
+    choco install -y VirtualBox.ExtensionPack
+
 }
 
 function Custom-Installs
@@ -150,12 +152,20 @@ function Install-LiveMeeting
     # LMSetup.exe -out <drive>:\<folder path>
     msiexec /qn /I "D:\Installers\LMConsole.msi"
 }
+
 function Install-ComicRack
 {
     $url = "http://comicrack.cyolito.com/downloads/comicrack/func-download/131/chk,ea95a6e77aa9fc1cebadf75bfe77d009/no_html,1/"
     $file = "D:\installers\ComicRackSetup09176.exe"
-    $arglist = @("/?")
+    $arglist = @("/S")
     Download-Install $file $url $arglist
+}
+
+function Install-LightRoom
+{
+    $file = "D:\installers\lightroom_5_ccm\Adobe_Lightroom_x64.msi"
+    $arglist = @("/passive")
+    & $file $arglist
 }
 
 function Download-File($file, $url)
