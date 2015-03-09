@@ -86,6 +86,12 @@ function Install-DevExpress($custid, $email, $password)
     Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
 }
 
+function Install-RbTools($url)
+{
+    easy_install rbtools
+    git config --global reviewboard.url $url
+}
+
 function Install-VsExtensions
 {
     $installer = "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\VSIXInstaller.exe"
@@ -259,7 +265,6 @@ function Git-Config
     #mergetool.BeyondCompare3.cmd="C:/Program Files (x86)/Beyond Compare 3/bcomp.exe" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     #core.editor="C:/Program Files (x86)/vim/vim74/gvim.exe" -f
     #alias.lg=log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    #reviewboard.url=https://manager.petnetsolutions.net/sd/rb/
 }
 
 function Add-Font($fontpath)
