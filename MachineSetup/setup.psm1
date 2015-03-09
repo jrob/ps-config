@@ -37,9 +37,7 @@ function Choco-Installs
     choco install -y vagrant
     choco install -y packer
     choco install -y beyondcompare
-    #cinst VisualStudio2013Ultimate -InstallArguments "/Features:'SQL Blend' /ProductKey:"
     #choco install MsSqlServerManagementStudio2014Express
-    #choco install resharper
 
     #frameworks
     choco install -y StrawberryPerl
@@ -115,6 +113,8 @@ function Install-VsExtensions
     $file = "D:\Installers\RelativeLineNumbers.vsix"
     Download-File $file $url
     & $installer /q $file
+
+    choco install -y resharper
 }
 
 function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
