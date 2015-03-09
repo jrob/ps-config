@@ -71,6 +71,21 @@ function Enable-Net35
     DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:D:\installers\35netsp1sources
 }
 
+function Install-DevExpress($custid, $email, $password)
+{
+    & "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"
+    $file = "D:\installers\DXperience-8.3.8.exe"
+    $arglist = @(
+        "/Q", 
+        "/EMAIL:$email", 
+        "/CUSTOMERID:$custid",
+        "/PASSWORD:$password",
+        "/DEBUG",
+        '"Demos:False"'
+        )
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+}
+
 function Install-VsExtensions
 {
     $installer = "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\VSIXInstaller.exe"
