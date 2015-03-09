@@ -29,7 +29,11 @@ function Choco-Installs
 
     # Dev
     choco install -y gitextensions
+
     choco install -y virtualbox
+    Start-Sleep -Seconds 10
+    choco install -y VirtualBox.ExtensionPack
+
     choco install -y vagrant
     choco install -y packer
     choco install -y beyondcompare
@@ -51,8 +55,6 @@ function Choco-Installs
 
     choco install -y pip
 
-    Add-PathFolders.ps1 "C:\PROGRA~2\Oracle\VirtualBox" process
-    choco install -y VirtualBox.ExtensionPack
 
 }
 
