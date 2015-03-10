@@ -74,8 +74,8 @@ function Install-DevExpress($custid, $email, $password)
     & "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"
     $file = "D:\installers\DXperience-8.3.8.exe"
     $arglist = @(
-        "/Q", 
-        "/EMAIL:$email", 
+        "/Q",
+        "/EMAIL:$email",
         "/CUSTOMERID:$custid",
         "/PASSWORD:$password",
         "/DEBUG",
