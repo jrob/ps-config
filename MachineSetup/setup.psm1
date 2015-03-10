@@ -398,5 +398,13 @@ function Setup-Basic
     Get-Consolas
 }
 
+function Setup-MsDevTools
+{
+    Install-Studio
+    Install-VsExtensions
+    Install-SsdtBi2013
+    Install-SsmsExpress
+}
+
 # Manual steps
 # run bootstrap
