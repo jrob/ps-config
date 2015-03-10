@@ -90,6 +90,23 @@ function Install-RbTools($url)
     git config --global reviewboard.url $url
 }
 
+function Install-SsdtBi2013
+{
+    # Sql BI tools for visual studio
+    # run and extract to D:\installers\SSDTBI_x86_ENU
+    # http://www.microsoft.com/en-us/download/details.aspx?id=42313
+    D:\installers\SSDTBI_x86_ENU\SETUP.EXE /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools
+}
+
+function Install-SsmsExpress
+{
+    # Sql server 2014 express
+    # http://www.microsoft.com/en-us/download/details.aspx?id=42299
+    # MgmtStudio 64BIT\SQLManagementStudio_x64_ENU.exe
+    # run and extract to D:\installers\SQLManagementStudio_x64_ENU
+    D:\installers\SQLManagementStudio_x64_ENU\SETUP.EXE /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools
+}
+
 function Install-VsExtensions
 {
     $installer = "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\VSIXInstaller.exe"
