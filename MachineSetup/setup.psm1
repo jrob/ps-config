@@ -3,6 +3,7 @@ function Choco-Installs
     choco install -y git-credential-winstore
     choco install -y anki
     choco install -y nssm
+    choco install -y sysinternals
 
     # Web
     choco install -y firefox
@@ -82,6 +83,13 @@ function Install-DevExpress($custid, $email, $password)
         '"Demos:False"'
         )
     Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+}
+
+function Set-PowerOptions
+{
+    powercfg /change monitor-timeout-ac 10
+    powercfg /change standby-timeout-ac 0
+    powercfg /change hibernate-timeout-ac 0
 }
 
 function Install-RbTools($url)
