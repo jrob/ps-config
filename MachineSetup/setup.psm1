@@ -53,8 +53,6 @@ function Choco-Installs
     Add-PathFolders.ps1 C:\tools\python\Scripts process
 
     choco install -y pip
-
-
 }
 
 function Custom-Installs
