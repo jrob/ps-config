@@ -334,11 +334,21 @@ function Install-Vim
     d:\installers\gvim-7-4-423.exe /S
 }
 
+function Install-PsGet($useProxy)
+{
+    $wc = new-object net.webclient
+    if ($useProxy)
+    {
+        $wc.UseDefaultCredentials = $true
+        $wc.Proxy.Credentials = $wc.Credentials
+    }
+    $wc.DownloadString("http://psget.net/GetPsGet.ps1") | iex
+}
+
 function Prep-Powershell
 {
     choco install -y powershell4
     choco install -y pscx
-    (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
     Install-Module PSReadline
     Install-Module Posh-Git
 }
