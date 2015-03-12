@@ -90,6 +90,26 @@ function Install-DevExpress($custid, $email, $password)
     Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
 }
 
+function Setup-VirtualMachineTask($vmname, $user, $pass)
+{
+    # the following command can be used to shut the machine down.
+    #& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' controlvm machineName acpipowerbutton
+
+    $Stt = New-ScheduledTaskTrigger -AtStartup
+    $task = New-ScheduledTaskAction -Execute 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' -Argument "startvm $vmname --type headless"
+
+    $arglist = @{
+        '-TaskName'="Run-VirtualBoxMachine";
+        "-Description"="Start virtualmachine headless at machine start.";
+        "-Action"=$task;
+        "-Trigger"=$Stt
+        }
+    
+    if ($user) { $arglist += @{"-User"=$user; "-Password"=$pass} }
+    
+    Register-ScheduledTask @arglist -Force
+}
+
 function Set-PowerOptions
 {
     powercfg /change monitor-timeout-ac 10
