@@ -68,6 +68,13 @@ function Enable-Net35
     DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:D:\installers\35netsp1sources
 }
 
+function Get-UserPassword
+{
+    $response = Read-host "What's your password?" -AsSecureString
+    $password = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($response))
+    return $password
+}
+
 function Install-DevExpress($custid, $email, $password)
 {
     & "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"

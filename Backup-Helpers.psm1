@@ -18,7 +18,7 @@ function Restore-Backups($locations)
     }
 }
 
-function Schedule-Backup-Tasks($locations, $logfilepath)
+function Schedule-Backup-Tasks($locations, $logfilepath, $user, $pass)
 {
     $actions = @()
 
@@ -35,5 +35,15 @@ function Schedule-Backup-Tasks($locations, $logfilepath)
 
     $Stt = New-ScheduledTaskTrigger -Daily -At 3am
 
-    Register-ScheduledTask -Action $actions -TaskName "Run-Robocopy" -Description "Run robocopy batch jobs." -Trigger $Stt -RunLevel Highest
+    $arglist = @{
+        '-TaskName'="Run-Robocopy";
+        "-Action"=$actions;
+        "-Description"="Run robocopy batch jobs.";
+        "-Trigger"=$Stt;
+        "-RunLevel"="Highest"
+        }
+    
+    if ($user){ $arglist += @{"-User"=$user; "-Password"=$pass} }
+    
+    Register-ScheduledTask @arglist -Force
 }
