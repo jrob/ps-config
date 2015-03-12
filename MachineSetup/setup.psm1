@@ -104,9 +104,9 @@ function Setup-VirtualMachineTask($vmname, $user, $pass)
         "-Action"=$task;
         "-Trigger"=$Stt
         }
-    
+
     if ($user) { $arglist += @{"-User"=$user; "-Password"=$pass} }
-    
+
     Register-ScheduledTask @arglist -Force
 }
 
