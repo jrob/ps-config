@@ -307,6 +307,8 @@ function Git-Config
     git config --global user.email jeremy@robertsisland.com # Email
     git config --global branch.autosetuprebase always       # Force all new branches to automatically use rebase
     git config --global push.default simple
+
+    git config --global core.editor "gvim -f"
     #merge.tool=BeyondCompare3
     #difftool.BeyondCompare3.path=C:/Program Files (x86)/Beyond Compare 3/bcomp.exe
     #difftool.beyondcompare3.path=C:/Program Files (x86)/Beyond Compare 3/bcomp.exe
@@ -357,6 +359,7 @@ function Install-Vim
         Invoke-WebRequest http://superb-dca2.dl.sourceforge.net/project/cream/Vim/7.4.423/gvim-7-4-423.exe -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox -outfile d:\installers\gvim-7-4-423.exe
     }
     d:\installers\gvim-7-4-423.exe /S
+    Add-PathFolders.ps1 C:\Program Files (x86)\vim\vim74 user
 }
 
 function Install-PsGet($useProxy)
