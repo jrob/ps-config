@@ -4,6 +4,7 @@ function Choco-Installs
     choco install -y anki
     choco install -y nssm
     choco install -y sysinternals
+    Add-PathFolders.ps1 "C:\tools\sysinternals" process
 
     # Web
     choco install -y firefox
