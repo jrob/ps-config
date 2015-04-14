@@ -135,6 +135,19 @@ function Install-SsdtBi2013
     Write-Host "SsdtBi2013 finished"
 }
 
+function Install-Ssdt
+{
+    Write-Host "Install Ssdt"
+    # SSDT Tools
+    # https://msdn.microsoft.com/en-us/data/hh297027
+    # https://msdn.microsoft.com/en-us/dn864412
+    # SSDTSetup.exe /layout <destination>
+    $file = "D:\installers\ssdt\SSDTSetup.exe"
+    $arglist = @("/silent")
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+    Write-Host "Ssdt finished"
+}
+
 function Install-SsmsExpress
 {
     Write-Host "Install SsmsExpress"
@@ -472,6 +485,7 @@ function Setup-MsDevTools
     Install-Studio
     Install-VsExtensions
     Install-SsdtBi2013
+    Install-Ssdt
     Install-SsmsExpress
 }
 
