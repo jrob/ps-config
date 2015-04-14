@@ -77,6 +77,7 @@ function Get-UserPassword
 
 function Install-DevExpress($custid, $email, $password)
 {
+    Write-Host "Install DevExpress"
     & "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"
     $file = "D:\installers\DXperience-8.3.8.exe"
     $arglist = @(
@@ -88,6 +89,7 @@ function Install-DevExpress($custid, $email, $password)
         '"Demos:False"'
         )
     Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+    Write-Host "DevExpress finished"
 }
 
 function Setup-VirtualMachineTask($vmname, $user, $pass)
@@ -125,50 +127,65 @@ function Install-RbTools($url)
 
 function Install-SsdtBi2013
 {
+    Write-Host "Install SsdtBi2013"
     # Sql BI tools for visual studio
     # run and extract to D:\installers\SSDTBI_x86_ENU
     # http://www.microsoft.com/en-us/download/details.aspx?id=42313
     D:\installers\SSDTBI_x86_ENU\SETUP.EXE /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools
+    Write-Host "SsdtBi2013 finished"
 }
 
 function Install-SsmsExpress
 {
+    Write-Host "Install SsmsExpress"
     # Sql server 2014 express
     # http://www.microsoft.com/en-us/download/details.aspx?id=42299
     # MgmtStudio 64BIT\SQLManagementStudio_x64_ENU.exe
     # run and extract to D:\installers\SQLManagementStudio_x64_ENU
     D:\installers\SQLManagementStudio_x64_ENU\SETUP.EXE /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools
+    Write-Host "SsmsExpress finished"
 }
 
 function Install-VsExtensions
 {
     $installer = "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\VSIXInstaller.exe"
 
+    Write-Host "Install CodeMaid"
     $url = "https://visualstudiogallery.msdn.microsoft.com/76293c4d-8c16-4f4a-aee6-21f83a571496/file/9356/29/CodeMaid_v0.7.5.vsix"
     $file = "d:\Installers\CodeMaid_v0.7.5.vsix"
     Download-File $file $url
     & $installer /q $file
+    Write-Host "CodeMaid finished"
 
+    Write-Host "Install VsVim"
     $url = "https://visualstudiogallery.msdn.microsoft.com/59ca71b3-a4a3-46ca-8fe1-0e90e3f79329/file/6390/55/VsVim.vsix"
     $file = "d:\Installers\VsVim.vsix"
     Download-File $file $url
     & $installer /q $file
+    Write-Host "VsVim finished"
 
+    Write-Host "Install XamlStyler"
     $url = "https://visualstudiogallery.msdn.microsoft.com/3de2a3c6-def5-42c4-924d-cc13a29ff5b7/file/124126/12/XamlStyler.Package.vsix"
     $file = "D:\Installers\XamlStyler.Package.vsix"
     Download-File $file $url
     & $installer /q $file
+    Write-Host "XamlStyler finished"
 
+    Write-Host "Install RelativeLineNumbers"
     $url = "https://visualstudiogallery.msdn.microsoft.com/74d68e2b-ff64-4c51-a2ed-d8b164eee858/file/96667/6/RelativeLineNumbers.vsix"
     $file = "D:\Installers\RelativeLineNumbers.vsix"
     Download-File $file $url
     & $installer /q $file
+    Write-Host "RelativeLineNumbers finished"
 
+    Write-Host "Install Resharper"
     choco install -y resharper
+    Write-Host "Resharper finished"
 }
 
 function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
 {
+    Write-Host "Install BitviseSshServer"
     $file = "d:\installers\BvSshServer-Inst.exe"
     $url = "http://dl.bitvise.com/BvSshServer-Inst.exe"
     $arglist = @("-acceptEULA", "-defaultSite")
@@ -178,52 +195,61 @@ function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
 
     Download-Install $file $url $arglist
     net start BvSshServer
+    Write-Host "BitviseSshServer finished"
 }
 
 function Install-BitviseSshClient
 {
+    Write-Host "Install BitviseSshClient"
     $file = "d:\installers\BvSshClient-Inst.exe"
     $url = "http://dl.bitvise.com/BvSshClient-Inst.exe"
     $arglist = @("-acceptEULA", "-noDesktopIcon", "-installDir=""${env:ProgramFiles(x86)}\Bitvise SSH Client""" )
     Download-Install $file $url $arglist
+    Write-Host "BitviseSshClient finished"
 }
 
 function Install-Pandoc
 {
-    $file = "d:\installers\pandoc-1.13.2-windows.msi"
     Write-Host "Install Pandoc"
+    $file = "d:\installers\pandoc-1.13.2-windows.msi"
     $url = "https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi"
     $arglist = @("/quiet")
     Download-File $file $url
     & $file $arglist
-    Write-Host "Pandoc Complete"
+    Write-Host "Pandoc finished"
 }
 
 function Install-Office
 {
+    Write-Host "Install Office"
     # Download and extract the ISO.
     # Office 2013 Pro Plus with Sp1
     # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=57396
     $file = "D:\installers\office2013\setup.exe"
     $arglist = @("/config", """$env:USERPROFILE\scripts\powershell\Office2013_config.xml""")
     Download-Install $file "" $arglist
+    Write-Host "Office finished"
 }
 
 function Install-Studio
 {
+    Write-Host "Install Studio2013U4"
     # Download and extract the ISO.
     # Visual Studio 2013 udpate 4
     # https://msdn.microsoft.com/subscriptions/securedownloads/?#FileId=61638
     $file = "D:\installers\vs2013UltUpdate4\vs_ultimate.exe"
     $arglist = @("/Quiet", "/Passive", "/Log", """$env:USERPROFILE\Logs\vs2013\vs2013install.log""")
     Download-Install $file "" $arglist
+    Write-Host "Studio2013U4 finished"
 }
 
 function Install-LiveMeeting
 {
+    Write-Host "Install LiveMeeting"
     # https://technet.microsoft.com/en-us/library/bb663674(v=office.12).aspx
     # LMSetup.exe -out <drive>:\<folder path>
     msiexec /qn /I "D:\Installers\LMConsole.msi"
+    Write-Host "LiveMeeting finished"
 }
 
 function Install-ComicRack
