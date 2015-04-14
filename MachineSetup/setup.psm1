@@ -164,28 +164,28 @@ function Install-VsExtensions
     $installer = "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\VSIXInstaller.exe"
 
     Write-Host "Install CodeMaid"
-    $url = "https://visualstudiogallery.msdn.microsoft.com/76293c4d-8c16-4f4a-aee6-21f83a571496/file/9356/29/CodeMaid_v0.7.5.vsix"
+    $url = "https://visualstudiogallery.msdn.microsoft.com/76293c4d-8c16-4f4a-aee6-21f83a571496/file/9356/29/"
     $file = "d:\Installers\CodeMaid_v0.7.5.vsix"
     Download-File $file $url
     & $installer /q $file
     Write-Host "CodeMaid finished"
 
     Write-Host "Install VsVim"
-    $url = "https://visualstudiogallery.msdn.microsoft.com/59ca71b3-a4a3-46ca-8fe1-0e90e3f79329/file/6390/55/VsVim.vsix"
+    $url = "https://visualstudiogallery.msdn.microsoft.com/59ca71b3-a4a3-46ca-8fe1-0e90e3f79329/file/6390/55/"
     $file = "d:\Installers\VsVim.vsix"
     Download-File $file $url
     & $installer /q $file
     Write-Host "VsVim finished"
 
     Write-Host "Install XamlStyler"
-    $url = "https://visualstudiogallery.msdn.microsoft.com/3de2a3c6-def5-42c4-924d-cc13a29ff5b7/file/124126/12/XamlStyler.Package.vsix"
+    $url = "https://visualstudiogallery.msdn.microsoft.com/3de2a3c6-def5-42c4-924d-cc13a29ff5b7/file/124126/12/"
     $file = "D:\Installers\XamlStyler.Package.vsix"
     Download-File $file $url
     & $installer /q $file
     Write-Host "XamlStyler finished"
 
     Write-Host "Install RelativeLineNumbers"
-    $url = "https://visualstudiogallery.msdn.microsoft.com/74d68e2b-ff64-4c51-a2ed-d8b164eee858/file/96667/6/RelativeLineNumbers.vsix"
+    $url = "https://visualstudiogallery.msdn.microsoft.com/74d68e2b-ff64-4c51-a2ed-d8b164eee858/file/96667/6/"
     $file = "D:\Installers\RelativeLineNumbers.vsix"
     Download-File $file $url
     & $installer /q $file
