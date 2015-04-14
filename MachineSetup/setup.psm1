@@ -131,7 +131,9 @@ function Install-SsdtBi2013
     # Sql BI tools for visual studio
     # run and extract to D:\installers\SSDTBI_x86_ENU
     # http://www.microsoft.com/en-us/download/details.aspx?id=42313
-    D:\installers\SSDTBI_x86_ENU\SETUP.EXE /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools
+    $file = "D:\installers\SSDTBI_x86_ENU\SETUP.EXE"
+    $arglist = @("/Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools")
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
     Write-Host "SsdtBi2013 finished"
 }
 
@@ -155,7 +157,9 @@ function Install-SsmsExpress
     # http://www.microsoft.com/en-us/download/details.aspx?id=42299
     # MgmtStudio 64BIT\SQLManagementStudio_x64_ENU.exe
     # run and extract to D:\installers\SQLManagementStudio_x64_ENU
-    D:\installers\SQLManagementStudio_x64_ENU\SETUP.EXE /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools
+    $file = "D:\installers\SQLManagementStudio_x64_ENU\SETUP.EXE"
+    $arglist = @("/Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools")
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
     Write-Host "SsmsExpress finished"
 }
 
