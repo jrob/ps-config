@@ -47,10 +47,10 @@ function Choco-Installs
     choco install -y jre8
 
     choco install -y python
-    Add-PathFolders.ps1 C:\tools\python process
+    Add-PathFolders.ps1 "C:\tools\python" process
 
     choco install -y easy.install
-    Add-PathFolders.ps1 C:\tools\python\Scripts process
+    Add-PathFolders.ps1 "C:\tools\python\Scripts" process
 
     choco install -y pip
 }
@@ -387,8 +387,8 @@ function Get-Consolas
 function Install-Vim
 {
     choco install -y -x86 mingw
-    Remove-PathFolders.ps1 C:\tools\mingw64\bin user
-    Add-PathFolders.ps1 C:\tools\mingw32\bin user
+    Remove-PathFolders.ps1 "C:\tools\mingw64\bin" user
+    Add-PathFolders.ps1 "C:\tools\mingw32\bin" user
 
     # Vim Cream
     if ((test-path d:\installers\gvim-7-4-423.exe) -eq $false)
@@ -396,7 +396,7 @@ function Install-Vim
         Invoke-WebRequest http://superb-dca2.dl.sourceforge.net/project/cream/Vim/7.4.423/gvim-7-4-423.exe -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox -outfile d:\installers\gvim-7-4-423.exe
     }
     d:\installers\gvim-7-4-423.exe /S
-    Add-PathFolders.ps1 C:\Program Files (x86)\vim\vim74 user
+    Add-PathFolders.ps1 "C:\Program Files (x86)\vim\vim74" user
 }
 
 function Install-PsGet($useProxy)
