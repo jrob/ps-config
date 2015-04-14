@@ -451,6 +451,13 @@ function Enable-Task-Scheduler-History
     $log.SaveChanges()
 }
 
+function Enable-RemoteDesktop
+{
+    # Enable Remote Desktop
+    set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+    set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+}
+
 function Setup-Bin-Folder
 {
     mkdir "$home/bin" -Force
