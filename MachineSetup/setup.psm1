@@ -437,8 +437,8 @@ function Fix-Choco-Config
     # Modify C:\ProgramData\chocolatey\chocolateyinstall\chocolatey.config
     #    <cacheLocation>D:\choco</cacheLocation>
     # Close and reopen Powershell
-    $file = "C:\ProgramData\chocolatey\chocolateyinstall\chocolatey.config"
-    $before = "<cacheLocation></cacheLocation>"
+    $file = "C:\ProgramData\chocolatey\config\chocolatey.config"
+    $before = "<cacheLocation \>"
     $after = "<cacheLocation>D:\choco</cacheLocation>"
     Replace-In-File  $file $before $after
 }
