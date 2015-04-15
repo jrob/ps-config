@@ -79,7 +79,7 @@ function Get-UserPassword
 function Install-DevExpress($custid, $email, $password)
 {
     Write-Host "Install DevExpress"
-    & "C:\Program Files\AutoHotkey\AutoHotkey.exe" "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"
+    psexec -h -d "C:\Program Files\AutoHotkey\AutoHotkey.exe" "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"
     $file = "D:\installers\DXperience-8.3.8.exe"
     $arglist = @(
         "/Q",
