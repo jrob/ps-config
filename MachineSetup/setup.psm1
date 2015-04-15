@@ -95,6 +95,7 @@ function Install-DevExpress($custid, $email, $password)
 
 function Setup-VirtualMachineTask($vmname, $user, $pass)
 {
+    Write-Host "Setup VirtualMachineTask $vmname"
     # the following command can be used to shut the machine down.
     #& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' controlvm machineName acpipowerbutton
 
@@ -111,6 +112,7 @@ function Setup-VirtualMachineTask($vmname, $user, $pass)
     if ($user) { $arglist += @{"-User"=$user; "-Password"=$pass} }
 
     Register-ScheduledTask @arglist -Force
+    Write-Host "Setup VirtualMachineTask $vmname finished"
 }
 
 function Set-PowerOptions
