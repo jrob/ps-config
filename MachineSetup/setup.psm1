@@ -284,9 +284,7 @@ function Create-Profiles
 {
     # Powershell Profile
     $profilecontent = @'
-$scripts = "$env:homedrive$env:homepath\scripts"
-$usepscx3 = $True
-. "$scripts\PowerShell\profile.ps1"
+. "$env:USERPROFILE\scripts\PowerShell\profile.ps1"
 '@
     mkdir -Path ~\Documents\WindowsPowerShell -Force
     $profilecontent | Out-File $profile -Force
@@ -376,7 +374,6 @@ function Install-PsGet($useProxy)
 function Prep-Powershell
 {
     choco install -y powershell4
-    choco install -y pscx
     Install-Module PSReadline
     Install-Module Posh-Git
 }

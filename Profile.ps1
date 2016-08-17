@@ -6,14 +6,6 @@ $env:Path += ";" + $scripts + "\Perl\ack"
 $env:PATHEXT += ";.py"
 $env:PATHEXT += ";.pl"
 
-if ($usepscx3 -eq $True)
-{
-    Import-Module Pscx
-}
-else
-{
-    Import-Module "$pscx\pscx.psd1" -arg "$scripts\powershell\Pscx.UserPreferences.ps1"
-}
 
 Import-Module Posh-Git
 
