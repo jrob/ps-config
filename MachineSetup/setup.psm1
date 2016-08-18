@@ -1,6 +1,6 @@
 function Choco-Installs
 {
-    choco install -y git-credential-winstore
+    choco install -y git-credential-manager-for-windows
     choco install -y anki
     choco install -y nssm
     choco install -y sysinternals
