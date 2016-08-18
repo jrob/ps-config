@@ -6,6 +6,7 @@ function Choco-Installs
     choco install -y sysinternals
     Add-PathFolders.ps1 "C:\tools\sysinternals" process
     choco install -y pandoc
+    choco install -y bitvise-ssh-client --allow-empty-checksums --ignore-checksums
 
     # Web
     choco install -y firefox
@@ -61,7 +62,6 @@ function Choco-Installs
 
 function Custom-Installs
 {
-    Install-BitviseSshClient
     Install-LiveMeeting
     Enable-Net35
 }
@@ -207,27 +207,8 @@ function Install-VsExtensions
 
 function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
 {
-    Write-Host "Install BitviseSshServer"
-    $file = "d:\installers\BvSshServer-Inst.exe"
-    $url = "http://dl.bitvise.com/BvSshServer-Inst.exe"
-    $arglist = @("-acceptEULA", "-defaultSite")
-    if ($settings) { $arglist += "-settings=""$settings""" }
-    if ($activationCode) { $arglist += "-activationCode=""$activationCode""" }
-    if ($keypairFile) { $arglist += "-keypairs=""$keypairFile""" }
-
-    Download-Install $file $url $arglist
-    net start BvSshServer
-    Write-Host "BitviseSshServer finished"
-}
-
-function Install-BitviseSshClient
-{
-    Write-Host "Install BitviseSshClient"
-    $file = "d:\installers\BvSshClient-Inst.exe"
-    $url = "http://dl.bitvise.com/BvSshClient-Inst.exe"
-    $arglist = @("-acceptEULA", "-noDesktopIcon", "-installDir=""${env:ProgramFiles(x86)}\Bitvise SSH Client""" )
-    Download-Install $file $url $arglist
-    Write-Host "BitviseSshClient finished"
+    $packageParams =  "'/acceptEULA /activationCode=$activationCode /settings=$settings /keypairs=$keypairFile'"
+    choco install -y bitvise-ssh-server --allow-empty-checksums --ignore-checksums --package-parameters $packageParams
 }
 
 function Install-Office
