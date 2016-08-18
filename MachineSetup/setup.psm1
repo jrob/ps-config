@@ -35,6 +35,7 @@ function Choco-Installs
     choco install -y virtualbox --allow-empty-checksums
     Start-Sleep -Seconds 10
     choco install -y VirtualBox.ExtensionPack --allow-empty-checksums
+    choco install -y sql-server-management-studio
 
     choco install -y vcredist2010 --allow-empty-checksums
     choco install -y vagrant
@@ -129,19 +130,6 @@ function Install-Ssdt
     $arglist = @("/silent")
     Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
     Write-Host "Ssdt finished"
-}
-
-function Install-SsmsExpress
-{
-    Write-Host "Install SsmsExpress"
-    # Sql server 2014 express
-    # http://www.microsoft.com/en-us/download/details.aspx?id=42299
-    # MgmtStudio 64BIT\SQLManagementStudio_x64_ENU.exe
-    # run and extract to D:\installers\SQLManagementStudio_x64_ENU
-    $file = "D:\installers\SQLManagementStudio_x64_ENU\SETUP.EXE"
-    $arglist = @("/Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=Tools")
-    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
-    Write-Host "SsmsExpress finished"
 }
 
 function Install-VsExtensions
@@ -439,7 +427,6 @@ function Setup-MsDevTools
     Install-VsExtensions
     Install-SsdtBi2013
     Install-Ssdt
-    Install-SsmsExpress
 }
 
 # Manual steps
