@@ -67,7 +67,7 @@ function Install-DevExpress($custid, $email, $password)
 {
     Write-Host "Install DevExpress"
     psexec -h -d "C:\Program Files\AutoHotkey\AutoHotkey.exe" "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"
-    $file = "D:\installers\DXperience-8.3.8.exe"
+    $file = "D:\Archives\DXperience-8.3.8.exe"
     $arglist = @(
         "/Q",
         "/EMAIL:$email",
@@ -350,11 +350,11 @@ function Get-Consolas
 
     foreach ($font in $fonts)
     {
-        if ((test-path d:\installers\$font) -eq $false)
+        if ((test-path d:\Archives\Consolas\$font) -eq $false)
         {
-            Invoke-WebRequest ($url + $font + "?raw=true") -OutFile d:\installers\$font
+            Invoke-WebRequest ($url + $font + "?raw=true") -OutFile d:\Archives\Consolas\$font
         }
-        Add-Font d:\installers\$font
+        Add-Font d:\Archives\Consolas\$font
     }
 }
 
