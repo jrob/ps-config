@@ -214,6 +214,33 @@ function Install-LightRoom
     Start-Process  -FilePath msiexec -ArgumentList $arglist -Wait
 }
 
+function Install-Vs2102
+{
+    $InstallerDirectory = "C:\temp\vs2012-ultimate"
+    if (Test-Path $InstallerDirectory) { Remove-Item $InstallerDirectory -Force -Recurse }
+    New-Item $InstallerDirectory -force -ItemType directory
+    & 'C:\Program Files\7-Zip\7z.exe' x -o"$InstallerDirectory" D:\Archives\en_visual_studio_ultimate_2012_x86_dvd_2262106.iso
+    $file = "$InstallerDirectory\vs_ultimate.exe"
+    $arglist = @("/Quiet", "/Passive", "/Log", """$env:USERPROFILE\Logs\vs2012\vs2012install.log""")
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+    Remove-Item $InstallerDirectory -Force -Recurse
+}
+
+function Install-SsdtVs2012
+{
+    # https://msdn.microsoft.com/en-us/jj650015
+    # http://go.microsoft.com/fwlink/?LinkID=518814&clcid=0x409
+    # SSDT_11.1.50512.0_EN.iso
+    $InstallerDirectory = "C:\temp\vs2012-ssdt"
+    if (Test-Path $InstallerDirectory) { Remove-Item $InstallerDirectory -Force -Recurse }
+    New-Item $InstallerDirectory -force -ItemType directory
+    & 'C:\Program Files\7-Zip\7z.exe' x -o"$InstallerDirectory" D:\Archives\SSDT_11.1.50512.0_EN.iso
+    $file = "$InstallerDirectory\SSDTSETUP.exe"
+    $arglist = @("/silent")
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+    Remove-Item $InstallerDirectory -Force -Recurse
+}
+
 function Download-File($file, $url)
 {
     $useragent = [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
