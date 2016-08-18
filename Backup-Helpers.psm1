@@ -1,10 +1,12 @@
-﻿function Run-Backups($locations, $logfiles)
+﻿function Run-Backups($locations, $logfile)
 {
+    $count = 0
     foreach ($i in $locations)
     {
         $src = $i.src
         $dst = $i.dst
         robocopy "$src" "$dst" /MIR /ZB /NP /MT /LOG:"$logfile$count.txt"
+        $count++
     }
 }
 
@@ -16,6 +18,7 @@ function Restore-Backups($locations, $logfile)
         $src = $i.src
         $dst = $i.dst
         robocopy "$dst" "$src" /E /NP /MT /LOG:"$logfile$count.txt"
+        $count++
     }
 }
 
