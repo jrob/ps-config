@@ -214,6 +214,15 @@ function Install-SsdtVs2012
     Remove-Item $InstallerDirectory -Force -Recurse
 }
 
+function Install-SsdtVs2015
+{
+    # https://msdn.microsoft.com/en-us/mt186501.aspx
+    # C:\Users\robeje10\Downloads\SSDTSetup.exe /layout D:\archives\ssdt-2015
+    $file = "D:\archives\ssdt-2015\SSDTSetup.exe"
+    $arglist = @("/silent", "/norestart")
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+}
+
 function Install-Visio
 {
     # visio
