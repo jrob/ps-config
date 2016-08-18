@@ -3,7 +3,6 @@ function Choco-Installs
     choco install -y git-credential-manager-for-windows
     choco install -y nssm --allow-empty-checksums
     choco install -y sysinternals
-    Add-PathFolders.ps1 "C:\tools\sysinternals" process
     choco install -y pandoc
     choco install -y bitvise-ssh-client --allow-empty-checksums --ignore-checksums
 
@@ -33,7 +32,6 @@ function Choco-Installs
     choco install -y gitextensions
 
     choco install -y virtualbox --allow-empty-checksums
-    Start-Sleep -Seconds 10
     choco install -y VirtualBox.ExtensionPack --allow-empty-checksums
     choco install -y visualstudio2015enterprise
     choco install -y sql-server-management-studio
