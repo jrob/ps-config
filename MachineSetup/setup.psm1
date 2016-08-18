@@ -375,13 +375,6 @@ function Install-PsGet($useProxy)
     $wc.DownloadString("http://psget.net/GetPsGet.ps1") | iex
 }
 
-function Prep-Powershell
-{
-    choco install -y powershell4
-    Install-Module PSReadline
-    Install-Module Posh-Git
-}
-
 function Replace-In-File($filename, $before, $after)
 {
     (Get-Content $filename) |
@@ -429,10 +422,18 @@ function phase2
 
 function Setup-Basic
 {
+    Enable-RemoteDesktop
+
+    # Prep-Powershell
+    Install-PsGet $true
+    choco install -y pscx
+    Install-Module Posh-Git
+
+    # Git
     Git-Config
     Git-Clones
     Setup-Bin-Folder
-    Prep-Powershell
+
     Create-Profiles
     Prep-Conemu
     choco install -y vim --allow-empty-checksums
