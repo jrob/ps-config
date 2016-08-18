@@ -223,6 +223,15 @@ function Install-SsdtVs2015
     Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
 }
 
+function Install-ParallelsClient ($settingsFile)
+{
+    $file = "D:\archives\RASClient-x64_Parllels_15.0.4_3830_hf4.msi"
+    cp $settingsFile D:\archives\2xsettings.2xc
+    $arglist = @("/i", $file, "/passive", "/norestart", "OVERRIDEUSERSETTINGS=1")
+    Start-Process -FilePath msiexec -ArgumentList $arglist -Wait
+    remove-item D:\archives\2xsettings.2xc
+}
+
 function Install-Visio
 {
     # visio
