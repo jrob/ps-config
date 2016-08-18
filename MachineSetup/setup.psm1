@@ -35,8 +35,18 @@ function Choco-Installs
     choco install -y virtualbox --allow-empty-checksums
     Start-Sleep -Seconds 10
     choco install -y VirtualBox.ExtensionPack --allow-empty-checksums
+    choco install -y visualstudio2015enterprise
     choco install -y sql-server-management-studio
+    choco install -y awscli
+    choco install -y chefdk
+    choco install -y wixtoolset --allow-empty-checksums
 
+    # JetBrains tools
+    choco install -y resharper-platform --allow-empty-checksums
+    choco install -y resharper
+    choco install -y dotmemory
+    choco install -y dottrace
+    choco install -y dotcover
     choco install -y vcredist2010 --allow-empty-checksums
     choco install -y vagrant
     choco install -y packer
@@ -163,10 +173,6 @@ function Install-VsExtensions
     Download-File $file $url
     & $installer /q $file
     Write-Host "RelativeLineNumbers finished"
-
-    Write-Host "Install Resharper"
-    choco install -y resharper
-    Write-Host "Resharper finished"
 }
 
 function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
