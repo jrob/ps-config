@@ -4,7 +4,7 @@
     {
         $src = $i.src
         $dst = $i.dst
-        robocopy "$src" "$dst" /MIR /ZB /V
+        robocopy "$src" "$dst" /MIR /ZB /NP
     }
 }
 
@@ -14,7 +14,7 @@ function Restore-Backups($locations)
     {
         $src = $i.src
         $dst = $i.dst
-        robocopy "$dst" "$src" /E
+        robocopy "$dst" "$src" /E /NP
     }
 }
 
@@ -27,8 +27,8 @@ function Schedule-Backup-Tasks($locations, $logfilepath, $user, $pass)
     {
         $src = $i.src
         $dst = $i.dst
-        #Write-Host """$src"" ""$dst"" /MIR /ZB /V"
-        $newTask = New-ScheduledTaskAction -Execute 'C:\Windows\System32\Robocopy.exe' -Argument """$src"" ""$dst"" /MIR /ZB /V $logopt"
+        #Write-Host """$src"" ""$dst"" /MIR /ZB /NP"
+        $newTask = New-ScheduledTaskAction -Execute 'C:\Windows\System32\Robocopy.exe' -Argument """$src"" ""$dst"" /MIR /ZB /NP $logopt"
         $actions += $newTask
         $logopt = "/log+:$logfilepath"
     }
