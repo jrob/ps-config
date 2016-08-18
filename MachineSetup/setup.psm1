@@ -2,7 +2,7 @@ function Choco-Installs
 {
     choco install -y git-credential-manager-for-windows
     choco install -y anki
-    choco install -y nssm
+    choco install -y nssm --allow-empty-checksums
     choco install -y sysinternals
     Add-PathFolders.ps1 "C:\tools\sysinternals" process
 
@@ -11,34 +11,36 @@ function Choco-Installs
     choco install -y GoogleChrome
 
     # utils
-    choco install -y adobereader
+    choco install -y adobereader --allow-empty-checksums
     choco install -y 7zip
     choco install -y notepadplusplus
     choco install -y ccleaner
     choco install -y winscp
-    choco install -y autohotkey
-    choco install -y f.lux
+    choco install -y autohotkey --allow-empty-checksums
+    choco install -y f.lux --allow-empty-checksums
     choco install -y spacesniffer
     choco install -y mousewithoutborders
     choco install -y teamspeak
 
     # apps
     choco install -y keepass
+    choco install -y autohotkey.portable --allow-empty-checksums
     choco install -y dropbox
-    choco install -y evernote
-    choco install -y linqpad4
-    choco install -y picasa
+    choco install -y evernote --allow-empty-checksums
+    choco install -y linqpad4 --allow-empty-checksums
+    choco install -y picasa --allow-empty-checksums
 
     # Dev
     choco install -y gitextensions
 
-    choco install -y virtualbox
+    choco install -y virtualbox --allow-empty-checksums
     Start-Sleep -Seconds 10
-    choco install -y VirtualBox.ExtensionPack
+    choco install -y VirtualBox.ExtensionPack --allow-empty-checksums
 
+    choco install -y vcredist2010 --allow-empty-checksums
     choco install -y vagrant
     choco install -y packer
-    choco install -y beyondcompare
+    choco install -y beyondcompare --allow-empty-checksums
     #choco install MsSqlServerManagementStudio2014Express
 
     #frameworks
