@@ -5,6 +5,7 @@ function Choco-Installs
     choco install -y nssm --allow-empty-checksums
     choco install -y sysinternals
     Add-PathFolders.ps1 "C:\tools\sysinternals" process
+    choco install -y pandoc
 
     # Web
     choco install -y firefox
@@ -60,7 +61,6 @@ function Choco-Installs
 
 function Custom-Installs
 {
-    Install-Pandoc
     Install-BitviseSshClient
     Install-LiveMeeting
     Enable-Net35
@@ -228,17 +228,6 @@ function Install-BitviseSshClient
     $arglist = @("-acceptEULA", "-noDesktopIcon", "-installDir=""${env:ProgramFiles(x86)}\Bitvise SSH Client""" )
     Download-Install $file $url $arglist
     Write-Host "BitviseSshClient finished"
-}
-
-function Install-Pandoc
-{
-    Write-Host "Install Pandoc"
-    $file = "d:\installers\pandoc-1.13.2-windows.msi"
-    $url = "https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-windows.msi"
-    $arglist = @("/quiet")
-    Download-File $file $url
-    & $file $arglist
-    Write-Host "Pandoc finished"
 }
 
 function Install-Office
