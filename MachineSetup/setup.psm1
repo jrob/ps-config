@@ -30,7 +30,6 @@ function Choco-Installs
 
     # Dev
     choco install -y gitextensions
-
     choco install -y virtualbox --allow-empty-checksums
     choco install -y VirtualBox.ExtensionPack --allow-empty-checksums
     choco install -y visualstudio2015enterprise
@@ -50,11 +49,6 @@ function Choco-Installs
     choco install -y packer
     choco install -y beyondcompare --allow-empty-checksums
     #choco install MsSqlServerManagementStudio2014Express
-}
-
-function Custom-Installs
-{
-    Enable-Net35
 }
 
 function Enable-Net35
@@ -439,14 +433,3 @@ function Setup-Basic
     choco install -y vim --allow-empty-checksums
     Get-Consolas
 }
-
-function Setup-MsDevTools
-{
-    Install-Studio
-    Install-VsExtensions
-    Install-SsdtBi2013
-    Install-Ssdt
-}
-
-# Manual steps
-# run bootstrap
