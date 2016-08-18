@@ -241,6 +241,36 @@ function Install-SsdtVs2012
     Remove-Item $InstallerDirectory -Force -Recurse
 }
 
+function Install-Visio
+{
+    # visio
+    $InstallerDirectory = "C:\temp\visio"
+    if (Test-Path $InstallerDirectory) { Remove-Item $InstallerDirectory -Force -Recurse }
+    $ConfigFile = "$installerDirectory\visio_config.xml"
+    $file = "D:\Archives\en_visio_professional_2013_with_sp1_x64_3910816.exe"
+    $arglist = @("/extract:$InstallerDirectory")
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+@"
+<Configuration>
+<Display Level="none" AcceptEula="yes" />
+<!-- <Logging Type="standard" Path="%temp%" Template="Microsoft Office Professional Plus Setup(*).txt" /> -->
+<!-- <USERNAME Value="Customer" /> -->
+<!-- <COMPANYNAME Value="MyCompany" /> -->
+<!-- <INSTALLLOCATION Value="%programfiles%\Microsoft Office" /> -->
+<!-- <LIS CACHEACTION="CacheOnly" /> -->
+<!-- <LIS SOURCELIST="\\server1\share\Office;\\server2\share\Office" /> -->
+<!-- <DistributionPoint Location="\\server\share\Office" /> -->
+<!-- <OptionState Id="OptionID" State="absent" Children="force" /> -->
+<!-- <Setting Id="SETUP_REBOOT" Value="IfNeeded" /> -->
+<!-- <Command Path="%windir%\system32\msiexec.exe" Args="/i \\server\share\my.msi" QuietArg="/q" ChainPosition="after" Execute="install" /> -->
+</Configuration>
+"@ | Out-File $ConfigFile
+    $file = "$InstallerDirectory\setup.exe"
+    $arglist = @("/config $ConfigFile")
+    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
+    Remove-Item $InstallerDirectory -Force -Recurse
+}
+
 function Download-File($file, $url)
 {
     $useragent = [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
