@@ -358,18 +358,6 @@ function Replace-In-File($filename, $before, $after)
     Set-Content $filename
 }
 
-function Fix-Choco-Config
-{
-    # Open Notepad as administrator
-    # Modify C:\ProgramData\chocolatey\chocolateyinstall\chocolatey.config
-    #    <cacheLocation>D:\choco</cacheLocation>
-    # Close and reopen Powershell
-    $file = "C:\ProgramData\chocolatey\config\chocolatey.config"
-    $before = "<cacheLocation \>"
-    $after = "<cacheLocation>D:\choco</cacheLocation>"
-    Replace-In-File  $file $before $after
-}
-
 function Prep-Conemu
 {
     choco install -y conemu
@@ -410,7 +398,6 @@ function phase2
 
 function Setup-Basic
 {
-    Fix-Choco-Config
     Git-Config
     Git-Clones
     Setup-Bin-Folder
