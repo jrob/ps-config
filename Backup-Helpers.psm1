@@ -42,8 +42,8 @@ function Schedule-Backup-Tasks($locations, $logfilepath, $user, $pass)
         "-Trigger"=$Stt;
         "-RunLevel"="Highest"
         }
-    
+
     if ($user){ $arglist += @{"-User"=$user; "-Password"=$pass} }
-    
+
     Register-ScheduledTask @arglist -Force
 }
