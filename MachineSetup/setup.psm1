@@ -1,7 +1,6 @@
 function Choco-Installs
 {
     choco install -y git-credential-manager-for-windows
-    choco install -y anki
     choco install -y nssm --allow-empty-checksums
     choco install -y sysinternals
     Add-PathFolders.ps1 "C:\tools\sysinternals" process
@@ -21,8 +20,6 @@ function Choco-Installs
     choco install -y autohotkey --allow-empty-checksums
     choco install -y f.lux --allow-empty-checksums
     choco install -y spacesniffer
-    choco install -y mousewithoutborders
-    choco install -y teamspeak
 
     # apps
     choco install -y keepass
@@ -44,25 +41,10 @@ function Choco-Installs
     choco install -y packer
     choco install -y beyondcompare --allow-empty-checksums
     #choco install MsSqlServerManagementStudio2014Express
-
-    #frameworks
-    choco install -y StrawberryPerl
-    Remove-PathFolders.ps1 C:\strawberry\c\bin machine
-
-    choco install -y jre8
-
-    choco install -y python
-    Add-PathFolders.ps1 "C:\tools\python" process
-
-    choco install -y easy.install
-    Add-PathFolders.ps1 "C:\tools\python\Scripts" process
-
-    choco install -y pip
 }
 
 function Custom-Installs
 {
-    Install-LiveMeeting
     Enable-Net35
 }
 
@@ -122,12 +104,6 @@ function Set-PowerOptions
     powercfg /change monitor-timeout-ac 10
     powercfg /change standby-timeout-ac 0
     powercfg /change hibernate-timeout-ac 0
-}
-
-function Install-RbTools($url)
-{
-    easy_install rbtools
-    git config --global reviewboard.url $url
 }
 
 function Install-SsdtBi2013
@@ -233,15 +209,6 @@ function Install-Studio
     $arglist = @("/Quiet", "/Passive", "/Log", """$env:USERPROFILE\Logs\vs2013\vs2013install.log""")
     Download-Install $file "" $arglist
     Write-Host "Studio2013U4 finished"
-}
-
-function Install-LiveMeeting
-{
-    Write-Host "Install LiveMeeting"
-    # https://technet.microsoft.com/en-us/library/bb663674(v=office.12).aspx
-    # LMSetup.exe -out <drive>:\<folder path>
-    msiexec /qn /I "D:\Installers\LMConsole.msi"
-    Write-Host "LiveMeeting finished"
 }
 
 function Install-ComicRack
