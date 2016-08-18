@@ -318,21 +318,6 @@ function Get-Consolas
     }
 }
 
-function Install-Vim
-{
-    choco install -y -x86 mingw
-    Remove-PathFolders.ps1 "C:\tools\mingw64\bin" user
-    Add-PathFolders.ps1 "C:\tools\mingw32\bin" user
-
-    # Vim Cream
-    if ((test-path d:\installers\gvim-7-4-423.exe) -eq $false)
-    {
-        Invoke-WebRequest http://superb-dca2.dl.sourceforge.net/project/cream/Vim/7.4.423/gvim-7-4-423.exe -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox -outfile d:\installers\gvim-7-4-423.exe
-    }
-    d:\installers\gvim-7-4-423.exe /S
-    Add-PathFolders.ps1 "C:\Program Files (x86)\vim\vim74" user
-}
-
 function Install-PsGet($useProxy)
 {
     $wc = new-object net.webclient
@@ -404,7 +389,7 @@ function Setup-Basic
     Prep-Powershell
     Create-Profiles
     Prep-Conemu
-    Install-Vim
+    choco install -y vim --allow-empty-checksums
     Get-Consolas
 }
 
