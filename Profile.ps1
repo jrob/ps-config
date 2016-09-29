@@ -1,5 +1,3 @@
-﻿#$s=Get-Date
-
 $env:Path += ";" + $scripts + "\powershell"
 $env:Path += ";" + $scripts + "\python"
 $env:Path += ";" + $scripts + "\Perl\ack"
@@ -9,16 +7,10 @@ $env:PATHEXT += ";.pl"
 
 Import-Module Posh-Git
 
-Set-Alias di ls
-
 Function vi { & "C:\Program Files (x86)\vim\vim74\gvim.exe" --remote-tab-silent $args }
 
 Set-Alias mr ($scripts + "\PowerShell\MassRename.ps1")
 Set-Alias which ($scripts + "\PowerShell\Which.ps1")
-
-Set-Alias formd ($scripts + "\Python\formd\src\formd.py")
-
-function mako { python ($scripts + "\Python\mako-render.py") $args }
 
 $MaximumHistoryCount = 31KB
 $ImportedHistoryCount = 0
@@ -56,13 +48,6 @@ if (Test-path ($HistoryDirPath + $HistoryFileName))
      Write-Host -Fore Green "`nLoaded $count history item(s).`n"
      $ImportedHistoryCount = $count
     }
-
-# hg function to search history
-function hg($arg) {
-    Get-History -c $MaximumHistoryCount | out-string -stream |
-    select-string $arg
-    }
-
 
 Import-Module PSReadLine
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
