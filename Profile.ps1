@@ -4,7 +4,6 @@ $env:Path += ";" + $scripts + "\Perl\ack"
 $env:PATHEXT += ";.py"
 $env:PATHEXT += ";.pl"
 
-
 Import-Module Posh-Git
 
 Function vi { & "C:\Program Files (x86)\vim\vim74\gvim.exe" --remote-tab-silent $args }
@@ -12,46 +11,11 @@ Function vi { & "C:\Program Files (x86)\vim\vim74\gvim.exe" --remote-tab-silent 
 Set-Alias mr ($scripts + "\PowerShell\MassRename.ps1")
 Set-Alias which ($scripts + "\PowerShell\Which.ps1")
 
-$MaximumHistoryCount = 31KB
-$ImportedHistoryCount = 0
-$HistoryDirPath = "~\"
-$HistoryFileName = "history.xml"
-
-if (!(Test-Path $HistoryDirPath -PathType Container))
-    {   New-Item $HistoryDirPath -ItemType Directory }
-
-Register-EngineEvent PowerShell.Exiting –Action {
-        $TotalHistoryCount = 0
-        Get-History | ? {$TotalHistoryCount++;$true}
-        $RecentHistoryCount = $TotalHistoryCount - $ImportedHistoryCount
-        $RecentHistory = Get-History -Count $RecentHistoryCount
-        if (!(Test-path ($HistoryDirPath + $HistoryFileName)))
-        {
-            "new file" >> c:\temp\out.txt
-            Get-History | Export-Clixml ($HistoryDirPath + $HistoryFileName)
-        }else
-        {
-            "add to file" >> c:\temp\out.txt
-            $OldHistory = Import-Clixml ($HistoryDirPath + $HistoryFileName)
-            $NewHistory = @()
-            $OldHistory | foreach {$NewHistory += $_}
-            $RecentHistory | foreach {$NewHistory += $_}
-            # Deduplicate
-            $NewHistory = $NewHistory | Group StartExecutionTime | Foreach {$_.Group[0]}
-            $NewHistory | Export-Clixml ($HistoryDirPath + $HistoryFileName)
-        }
-    } -SupportEvent
-
-if (Test-path ($HistoryDirPath + $HistoryFileName))
-    {
-        Import-Clixml ($HistoryDirPath + $HistoryFileName) | ? {$count++;$true} |Add-History
-     Write-Host -Fore Green "`nLoaded $count history item(s).`n"
-     $ImportedHistoryCount = $count
-    }
-
 Import-Module PSReadLine
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+Set-PSReadlineOption -HistoryNoDuplicates
+Set-PSReadlineOption -MaximumHistoryCount 16384
 
 cd ~
 
