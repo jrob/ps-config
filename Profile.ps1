@@ -1,9 +1,12 @@
+$scripts = "${env:home}\scripts"
+
 $env:Path += ";" + $scripts + "\powershell"
 $env:Path += ";" + $scripts + "\python"
 $env:Path += ";" + $scripts + "\Perl\ack"
 $env:PATHEXT += ";.py"
 $env:PATHEXT += ";.pl"
 
+Import-Module "$scripts\PowerShell\Proxy-Helpers.psm1"
 Import-Module Posh-Git
 
 Function vi { & "C:\Program Files (x86)\vim\vim74\gvim.exe" --remote-tab-silent $args }
