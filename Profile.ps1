@@ -19,7 +19,7 @@ Set-PSReadlineOption -MaximumHistoryCount 16384
 
 cd ~
 
-# Shamelessly modified from http://winterdom.com/2008/08/mypowershellprompt
+# Shamelessly modified from http://www.winterdom.com/powershell/2008/08/13/mypowershellprompt.html
 $Global:skip = $true
 function prompt {
     # our theme
