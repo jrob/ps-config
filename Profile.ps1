@@ -20,6 +20,17 @@ Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadlineOption -HistoryNoDuplicates
 Set-PSReadlineOption -MaximumHistoryCount 16384
 
+# Set colors
+$background = $Host.UI.RawUI.BackgroundColor
+$foreground = $Host.UI.RawUI.ForegroundColor
+$Host.PrivateData.ErrorBackgroundColor = $background
+$Host.PrivateData.WarningBackgroundColor = $background
+$Host.PrivateData.DebugBackgroundColor = $background
+$Host.PrivateData.VerboseBackgroundColor = $background
+
+$options = Get-PSReadlineOption
+$options.NumberForegroundColor = $foreground
+$options.MemberForegroundColor = "DarkGray"
 cd ~
 
 # Shamelessly modified from http://www.winterdom.com/powershell/2008/08/13/mypowershellprompt.html
