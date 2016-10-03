@@ -1,20 +1,20 @@
 $scripts = "${env:home}\scripts"
 
+Import-Module PSReadLine
+Import-Module Posh-Git
+Import-Module "$scripts\PowerShell\Proxy-Helpers.psm1"
+
 $env:Path += ";$scripts\powershell"
 $env:Path += ";$scripts\python"
 $env:Path += ";$scripts\Perl\ack"
 $env:PATHEXT += ";.py"
 $env:PATHEXT += ";.pl"
 
-Import-Module "$scripts\PowerShell\Proxy-Helpers.psm1"
-Import-Module Posh-Git
-
 Function vi { & "C:\Program Files (x86)\vim\vim74\gvim.exe" --remote-tab-silent $args }
 
 Set-Alias mr "$scripts\PowerShell\MassRename.ps1"
 Set-Alias which "$scripts\PowerShell\Which.ps1"
 
-Import-Module PSReadLine
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadlineOption -HistoryNoDuplicates
