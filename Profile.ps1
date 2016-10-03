@@ -21,6 +21,10 @@ Set-PSReadlineOption -HistoryNoDuplicates
 Set-PSReadlineOption -MaximumHistoryCount 16384
 
 # Set colors
+
+# git clone https://github.com/lukesampson/concfg
+# concfg.ps1 import ~\scripts\powershell\jrob.light.json
+
 $background = $Host.UI.RawUI.BackgroundColor
 $foreground = $Host.UI.RawUI.ForegroundColor
 $Host.PrivateData.ErrorBackgroundColor = $background
