@@ -328,13 +328,13 @@ function Git-Config
     git config --global push.default simple
 
     git config --global core.editor "gvim -f"
-    #merge.tool=BeyondCompare3
-    #difftool.BeyondCompare3.path=C:/Program Files (x86)/Beyond Compare 3/bcomp.exe
-    #difftool.beyondcompare3.path=C:/Program Files (x86)/Beyond Compare 3/bcomp.exe
-    #difftool.beyondcompare3.cmd="C:/Program Files (x86)/Beyond Compare 3/bcomp.exe" "$LOCAL" "$REMOTE"
-    #mergetool.BeyondCompare3.path=C:/Program Files (x86)/Beyond Compare 3/bcomp.exe
-    #mergetool.BeyondCompare3.cmd="C:/Program Files (x86)/Beyond Compare 3/bcomp.exe" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
-    #core.editor="C:/Program Files (x86)/vim/vim74/gvim.exe" -f
+
+    git config --global diff.tool bc
+    git config --global diff.guitool bc
+    git config --global difftool.bc.path "c:/Program Files/Beyond Compare 4/BComp.exe"
+    git config --global merge.tool bc
+    git config --global mergetool.bc.path "c:/Program Files/Beyond Compare 4/BComp.exe"
+
     #alias.lg=log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 }
 
