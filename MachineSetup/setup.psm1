@@ -27,6 +27,7 @@ function Choco-Installs
     choco install -y evernote --allow-empty-checksums
     choco install -y linqpad4 --allow-empty-checksums
     choco install -y picasa --allow-empty-checksums
+    choco install -y visualstudiocode
 
     # Dev
     choco install -y gitextensions
@@ -37,6 +38,11 @@ function Choco-Installs
     choco install -y awscli
     choco install -y chefdk
     choco install -y wixtoolset --allow-empty-checksums
+
+    # bfg-repo-cleaner
+    choco install -y jre8 --allow-empty-checksums
+    choco install -y vcredist2015
+    choco install -y bfg-repo-cleaner
 
     # JetBrains tools
     choco install -y resharper-platform --allow-empty-checksums
@@ -49,6 +55,8 @@ function Choco-Installs
     choco install -y packer
     choco install -y beyondcompare --allow-empty-checksums
     #choco install MsSqlServerManagementStudio2014Express
+
+    choco install -y python
 }
 
 function Enable-Net35
