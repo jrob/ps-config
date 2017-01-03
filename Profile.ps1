@@ -1,4 +1,4 @@
-$scripts = "${env:home}\scripts"
+$scripts = "$home\scripts"
 
 Import-Module PSReadLine
 Import-Module Posh-Git
