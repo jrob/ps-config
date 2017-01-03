@@ -390,13 +390,7 @@ function Replace-In-File($filename, $before, $after)
     Set-Content $filename
 }
 
-function Prep-Conemu
-{
-    choco install -y conemu
-    cmd /c mklink %appdata%\ConEmu.xml %homedrive%%homepath%\Scripts\Powershell\ConEmu.xml
-}
-
-function Enable-Task-Scheduler-History
+function Enable-TaskScheduler-History
 {
     #http://stackoverflow.com/questions/23227964/how-can-i-enable-all-tasks-history-in-powershell
     $logName = 'Microsoft-Windows-TaskScheduler/Operational'
