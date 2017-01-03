@@ -434,7 +434,6 @@ function Setup-Basic
 
     # Prep-Powershell
     Install-PsGet $true
-    choco install -y pscx
     Install-Module Posh-Git
 
     # Git
