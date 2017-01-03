@@ -1,4 +1,4 @@
-function Choco-Installs
+function Install-AppsCommon
 {
     choco install -y git-credential-manager-for-windows
     choco install -y nssm --allow-empty-checksums
@@ -19,6 +19,9 @@ function Choco-Installs
     choco install -y autohotkey --allow-empty-checksums
     choco install -y f.lux --allow-empty-checksums
     choco install -y spacesniffer
+    choco install -y visualstudiocode
+    choco install -y gitextensions
+    choco install -y beyondcompare --allow-empty-checksums
 
     # apps
     choco install -y keepass
@@ -26,11 +29,28 @@ function Choco-Installs
     choco install -y dropbox
     choco install -y evernote --allow-empty-checksums
     choco install -y linqpad4 --allow-empty-checksums
+
+    choco install -y python
+}
+
+function Install-AppsHome
+{
     choco install -y picasa --allow-empty-checksums
-    choco install -y visualstudiocode
+}
+
+function Install-AppsWork
+{
+    # JetBrains tools
+    choco install -y resharper-platform --allow-empty-checksums
+    choco install -y resharper
+    choco install -y dotmemory
+    choco install -y dottrace
+    choco install -y dotcover
+    choco install -y vcredist2010 --allow-empty-checksums
+    choco install -y vagrant
+    choco install -y packer
 
     # Dev
-    choco install -y gitextensions
     choco install -y virtualbox --allow-empty-checksums
     choco install -y VirtualBox.ExtensionPack --allow-empty-checksums
     choco install -y visualstudio2015enterprise
@@ -43,20 +63,6 @@ function Choco-Installs
     choco install -y jre8 --allow-empty-checksums
     choco install -y vcredist2015
     choco install -y bfg-repo-cleaner
-
-    # JetBrains tools
-    choco install -y resharper-platform --allow-empty-checksums
-    choco install -y resharper
-    choco install -y dotmemory
-    choco install -y dottrace
-    choco install -y dotcover
-    choco install -y vcredist2010 --allow-empty-checksums
-    choco install -y vagrant
-    choco install -y packer
-    choco install -y beyondcompare --allow-empty-checksums
-    #choco install MsSqlServerManagementStudio2014Express
-
-    choco install -y python
 }
 
 function Enable-Net35
