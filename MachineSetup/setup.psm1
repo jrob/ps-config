@@ -1,3 +1,26 @@
+function Setup-Basic
+{
+    Git-Config
+    Git-Clones
+    Create-Profiles
+
+    git clone https://github.com/lukesampson/concfg "$home\scripts\concfg"
+    & $home\scripts\concfg\bin\concfg.ps1 import "$home\scripts\powershell\jrob.light.json" --non-interactive
+    & $home\scripts\concfg\bin\concfg.ps1 clean
+}
+
+function Install-AppsMinimum
+{
+    choco install -y git
+    choco install -y vim --allow-empty-checksums
+    #choco install -y psget
+    Install-PsGet
+    Get-Consolas
+
+    # Prep-Powershell
+    Install-Module Posh-Git
+}
+
 function Install-AppsCommon
 {
     choco install -y git-credential-manager-for-windows
@@ -17,11 +40,11 @@ function Install-AppsCommon
     choco install -y ccleaner
     choco install -y winscp
     choco install -y autohotkey --allow-empty-checksums
-    choco install -y f.lux --allow-empty-checksums
+    choco install -y f.lux --allow-empty-checksums --ignore-checksums
     choco install -y spacesniffer
-    choco install -y visualstudiocode
     choco install -y gitextensions
     choco install -y beyondcompare --allow-empty-checksums
+    choco install -y visualstudiocode
 
     # apps
     choco install -y keepass
@@ -31,11 +54,29 @@ function Install-AppsCommon
     choco install -y linqpad4 --allow-empty-checksums
 
     choco install -y python
+    [Environment]::SetEnvironmentVariable("path", $env:path + ";C:\Python36\Scripts\", "Process")
+    [Environment]::SetEnvironmentVariable("path", $env:path + ";C:\Python36\", "Process")
+
+    choco install -y nodejs
+    [Environment]::SetEnvironmentVariable("path", $env:path + ";C:\Program Files\nodejs\", "Process")
+    npm install -g cfn-include
+    npm install -g proxy-agent
+
+    choco install -y activeperl
 }
 
 function Install-AppsHome
 {
     choco install -y picasa --allow-empty-checksums
+    choco install -y calibre
+    choco install -y curse-voice
+    choco install -y adobe-creative-cloud
+    choco install -y comicrack
+    choco install -y minecraft
+    choco install -y postbox
+
+    Install-MinecraftLaunchers
+    Install-Office
 }
 
 function Install-AppsWork
@@ -178,21 +219,6 @@ function Install-Studio
     Write-Host "Studio2013U4 finished"
 }
 
-function Install-ComicRack
-{
-    $url = "http://comicrack.cyolito.com/downloads/comicrack/func-download/131/chk,ea95a6e77aa9fc1cebadf75bfe77d009/no_html,1/"
-    $file = "D:\installers\ComicRackSetup09176.exe"
-    $arglist = @("/S")
-    Download-Install $file $url $arglist
-}
-
-function Install-LightRoom
-{
-    $file = "D:\installers\lightroom_5_ccm\Adobe_Lightroom_x64.msi"
-    $arglist = @("/i", $file, "/passive")
-    Start-Process  -FilePath msiexec -ArgumentList $arglist -Wait
-}
-
 function Install-Vs2102
 {
     $InstallerDirectory = "C:\temp\vs2012-ultimate"
@@ -286,11 +312,8 @@ function Download-Install($file, $url, $arglist)
     }
 }
 
-function Install-Minecraft
+function Install-MinecraftLaunchers
 {
-    $file = "d:\installers\MinecraftInstaller.msi"
-    if (Test-Path $file) { & $file /quiet }
-
     $file = "D:\installers\TechnicLauncher.exe"
     if (Test-Path $file) { cp $file $env:USERPROFILE\desktop }
 
@@ -372,7 +395,7 @@ function Get-Consolas
     }
 }
 
-function Install-PsGet($useProxy)
+function Install-PsGet
 {
     $wc = new-object net.webclient
     if ($useProxy)
@@ -390,7 +413,7 @@ function Replace-In-File($filename, $before, $after)
     Set-Content $filename
 }
 
-function Enable-TaskScheduler-History
+function Enable-TaskSchedulerHistory
 {
     #http://stackoverflow.com/questions/23227964/how-can-i-enable-all-tasks-history-in-powershell
     $logName = 'Microsoft-Windows-TaskScheduler/Operational'
@@ -404,39 +427,4 @@ function Enable-RemoteDesktop
     # Enable Remote Desktop
     set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-}
-
-function Setup-Bin-Folder
-{
-    mkdir "$home/bin" -Force
-    & $env:USERPROFILE\Scripts\Powershell\Add-PathFolders.ps1 "$($env:USERPROFILE)\bin" process
-    & $env:USERPROFILE\Scripts\Powershell\Add-PathFolders.ps1 "$($env:USERPROFILE)\bin" user
-    cmd /c mklink "%USERPROFILE%\bin\Add-PathFolders.ps1" "%USERPROFILE%\Scripts\Powershell\Add-PathFolders.ps1"
-    cmd /c mklink "%USERPROFILE%\bin\Get-PathFolders.ps1" "%USERPROFILE%\Scripts\Powershell\Get-PathFolders.ps1"
-    cmd /c mklink "%USERPROFILE%\bin\Remove-PathFolders.ps1" "%USERPROFILE%\Scripts\Powershell\Remove-PathFolders.ps1"
-}
-
-function phase2
-{
-    Choco-Installs
-    Manual-Installs
-}
-
-function Setup-Basic
-{
-    Enable-RemoteDesktop
-
-    # Prep-Powershell
-    Install-PsGet $true
-    Install-Module Posh-Git
-
-    # Git
-    Git-Config
-    Git-Clones
-    Setup-Bin-Folder
-
-    Create-Profiles
-    Prep-Conemu
-    choco install -y vim --allow-empty-checksums
-    Get-Consolas
 }
