@@ -13,7 +13,6 @@ function Install-AppsMinimum
 {
     choco install -y git
     choco install -y vim --allow-empty-checksums
-    #choco install -y psget
     Install-PsGet
     Get-Consolas
 
