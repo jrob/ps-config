@@ -74,6 +74,7 @@ function Install-AppsHome
     choco install -y comicrack
     choco install -y minecraft
     choco install -y postbox
+    choco install -y steam
 
     Install-MinecraftLaunchers
     Install-Office
