@@ -43,7 +43,13 @@ function Install-AppsCommon
     choco install -y spacesniffer
     choco install -y gitextensions
     choco install -y beyondcompare --allow-empty-checksums
+
+    # VS Code
     choco install -y visualstudiocode
+    [Environment]::SetEnvironmentVariable("path", $env:path + ";C:\Program Files (x86)\Microsoft VS Code\bin", "Process")
+    code --install-extension ms-vscode.csharp
+    code --install-extension ms-vscode.powershell
+    code --install-extension vscodevim.vim
 
     # apps
     choco install -y keepass
