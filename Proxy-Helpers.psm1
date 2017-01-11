@@ -1,5 +1,4 @@
 $VsConfigFile = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe.config"
-$proxy = ""
 
 function Get-VsConfigNoProxy
 {
@@ -12,7 +11,7 @@ function Get-VsConfigNoProxy
 "@
 }
 
-function Get-VsConfigWithProxy
+function Get-VsConfigWithProxy($proxy)
 {
     return @"
         <system.net>
@@ -20,31 +19,35 @@ function Get-VsConfigWithProxy
                 <ipv6 enabled="true"/>
             </settings>
             <defaultProxy useDefaultCredentials="true" enabled="true">
-                <proxy bypassonlocal="true" proxyaddress="${script:proxy}" />
+                <proxy bypassonlocal="true" proxyaddress="$proxy" />
             </defaultProxy>
         </system.net>
 "@
 }
 
+function Set-NoProxy($noProxy)
+{
+    [Environment]::SetEnvironmentVariable("no_proxy", $noProxy, "User")
+    [Environment]::SetEnvironmentVariable("no_proxy", $noProxy, "Process")
+}
+
 function Set-Proxy($proxy)
 {
-    $script:proxy = $proxy
-    [Environment]::SetEnvironmentVariable("no_proxy", "localhost,127.0.0.1,manager.petnetsolutions.net", "User")
     [Environment]::SetEnvironmentVariable("http_proxy", $proxy, "User")
     [Environment]::SetEnvironmentVariable("https_proxy", $proxy, "User")
-    [Environment]::SetEnvironmentVariable("no_proxy", "localhost,127.0.0.1,manager.petnetsolutions.net", "Process")
     [Environment]::SetEnvironmentVariable("http_proxy", $proxy, "Process")
     [Environment]::SetEnvironmentVariable("https_proxy", $proxy, "Process")
     $http_proxy = $proxy
     $https_proxy = $proxy
     choco config set proxy $proxy
-    $VsConfigWithProxy = Get-VsConfigWithProxy
+    $VsConfigWithProxy = Get-VsConfigWithProxy $proxy
     $VsConfigNoProxy = Get-VsConfigNoProxy
     Replace-Chunk-In-File $VsConfigFile $VsConfigNoProxy $VsConfigWithProxy
 }
 
 function Clear-Proxy
 {
+    $oldProxy = $env:https_proxy
     [Environment]::SetEnvironmentVariable("http_proxy", $null, "User")
     [Environment]::SetEnvironmentVariable("https_proxy", $null, "User")
     [Environment]::SetEnvironmentVariable("http_proxy", $null, "Process")
@@ -52,7 +55,7 @@ function Clear-Proxy
     $http_proxy = $null
     $https_proxy = $null
     choco config unset proxy
-    $VsConfigWithProxy = Get-VsConfigWithProxy
+    $VsConfigWithProxy = Get-VsConfigWithProxy $oldProxy
     $VsConfigNoProxy = Get-VsConfigNoProxy
     Replace-Chunk-In-File  $VsConfigFile $VsConfigWithProxy $VsConfigNoProxy
 }
