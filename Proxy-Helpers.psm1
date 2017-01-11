@@ -37,7 +37,7 @@ function Set-Proxy($proxy)
     [Environment]::SetEnvironmentVariable("https_proxy", $proxy, "Process")
     $http_proxy = $proxy
     $https_proxy = $proxy
-    choco config set proxy proxy
+    choco config set proxy $proxy
     $VsConfigWithProxy = Get-VsConfigWithProxy
     $VsConfigNoProxy = Get-VsConfigNoProxy
     Replace-Chunk-In-File $VsConfigFile $VsConfigNoProxy $VsConfigWithProxy
