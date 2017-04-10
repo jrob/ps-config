@@ -172,12 +172,6 @@ function Install-Ssdt
     Write-Host "Ssdt finished"
 }
 
-function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
-{
-    $packageParams =  "'/acceptEULA /activationCode=$activationCode /settings=$settings /keypairs=$keypairFile'"
-    choco install -y bitvise-ssh-server --allow-empty-checksums --ignore-checksums --package-parameters $packageParams
-}
-
 function Install-Office
 {
     Write-Host "Install Office"
