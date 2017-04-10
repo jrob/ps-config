@@ -118,23 +118,6 @@ function Get-UserPassword
     return $password
 }
 
-function Install-DevExpress($custid, $email, $password)
-{
-    Write-Host "Install DevExpress"
-    psexec -h -d "C:\Program Files\AutoHotkey\AutoHotkey.exe" "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"
-    $file = "D:\Archives\DXperience-8.3.8.exe"
-    $arglist = @(
-        "/Q",
-        "/EMAIL:$email",
-        "/CUSTOMERID:$custid",
-        "/PASSWORD:$password",
-        "/DEBUG",
-        '"Demos:False"'
-        )
-    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
-    Write-Host "DevExpress finished"
-}
-
 function Setup-VirtualMachineTask($vmname, $user, $pass)
 {
     Write-Host "Setup VirtualMachineTask $vmname"
