@@ -92,8 +92,7 @@ function Install-AppsWork
     choco install -y packer
 
     # Dev
-    choco install -y virtualbox --allow-empty-checksums
-    choco install -y VirtualBox.ExtensionPack --allow-empty-checksums
+    choco install -y virtualbox
     choco install -y visualstudio2015enterprise
     Install-SsdtVs2015
     choco install -y sql-server-management-studio
