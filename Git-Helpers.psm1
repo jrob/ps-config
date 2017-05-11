@@ -40,5 +40,63 @@ function Add-GitSplitBranches($branch)
     }
 }
 
+function Move-FormatCommit($formattingbranch, $targetbranch, $testbranch)
+{
+    git checkout $targetbranch
+    git branch -D format-branch-temp
+    git branch -D format-branch-rebase-temp
+
+    git branch format-branch-temp $targetbranch
+    $revlist = git rev-list "$targetbranch..$formattingbranch"
+    
+    [array]::Reverse($revlist)
+
+    git checkout format-branch-temp
+
+    #for($i=0; $i -le 4; $i++)
+    for($i=0; $i -le $revlist.Count; $i++)
+    {
+        $ref = $revlist[$i]
+        write-host $ref
+        git cherry-pick $ref
+        $checkForMergeConflicts = $true
+        while ($checkForMergeConflicts)
+        {
+            $lastcommitmsg = git log -1 --pretty=%B
+            $lastcommitmsg = ($lastcommitmsg -join "`n").trim()
+            if (($lastcommitmsg | measure-object -line).Lines -eq 1)
+            { 
+                $lastcommitmsg += "`n`nFiles not formatted:"
+            }
+            Write-Host $lastcommitmsg
+            git checkout -b format-branch-rebase-temp $testbranch
+            git rebase format-branch-temp
+            if(test-path .git/rebase-apply)
+            {
+                $failedfiles = git diff --name-only --diff-filter=U
+                git rebase --abort
+                git checkout format-branch-temp
+                git reset --mixed head^
+                foreach ($file in $failedfiles)
+                {
+                    Write-Host "reset $file"
+                    $lastcommitmsg += "`n$file"
+                    git checkout -- $file
+                }
+                git add .
+                git commit -m $lastcommitmsg
+            }
+            else
+            {
+                $checkForMergeConflicts = $false
+            }
+
+            git checkout format-branch-temp
+            git branch -D format-branch-rebase-temp
+        }
+    }
+}
+
 export-modulemember -function Add-GitSplitBranches
 export-modulemember -function Clear-GitSplitBranches
+export-modulemember -function Move-FormatCommit
