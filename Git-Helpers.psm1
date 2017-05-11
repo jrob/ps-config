@@ -97,6 +97,23 @@ function Move-FormatCommit($formattingbranch, $targetbranch, $testbranch)
     }
 }
 
+function Move-MultipleBranchesWithRebase($target, $branches)
+{
+    foreach ($branch in $branches)  
+    {
+        $localbranch = $branch
+        if ($branch.Contains("/"))
+        {
+            $localbranch = $branch.split("/")[1]
+            git branch $localbranch $branch
+        }
+        git checkout $localbranch
+        git rebase $target $localbranch
+        Write-Host ""
+    }
+}
+
 export-modulemember -function Add-GitSplitBranches
 export-modulemember -function Clear-GitSplitBranches
 export-modulemember -function Move-FormatCommit
+export-modulemember -function Move-MultipleBranchesWithRebase
