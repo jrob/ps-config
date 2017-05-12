@@ -40,25 +40,28 @@ function Add-GitSplitBranches($branch)
     }
 }
 
-function Move-FormatCommit($formattingbranch, $targetbranch, $testbranch)
+function Move-FormatCommit($basebranch, $formatbranch, $outbranch, $testbranch)
 {
-    git checkout $targetbranch
-    git branch -D format-branch-temp
-    git branch -D format-branch-rebase-temp
+    Write-Host "-------------------------------------------------------------"
+    Write-Host "-------------------------------------------------------------"
+    Write-Host "Creating $outbranch using $formatbranch and testing with $testbranch"
 
-    git branch format-branch-temp $targetbranch
-    $revlist = git rev-list "$targetbranch..$formattingbranch"
+    git branch -D $outbranch *>$null
+    git checkout -b $outbranch $basebranch *>$null
+    git branch -D format-branch-rebase-temp *>$null
+
+    $revlist = git rev-list "$outbranch..$formatbranch"
     
     [array]::Reverse($revlist)
 
-    git checkout format-branch-temp
-
-    #for($i=0; $i -le 4; $i++)
-    for($i=0; $i -le $revlist.Count; $i++)
+    #for($i=0; $i -le 1; $i++)
+    for($i=0; $i -lt $revlist.Count; $i++)
     {
         $ref = $revlist[$i]
-        write-host $ref
-        git cherry-pick $ref
+        Write-Host "`n-------------------------------------------------------------"
+        git cherry-pick $ref 1>$null
+        git log -1 --oneline
+
         $checkForMergeConflicts = $true
         while ($checkForMergeConflicts)
         {
@@ -69,30 +72,30 @@ function Move-FormatCommit($formattingbranch, $targetbranch, $testbranch)
                 $lastcommitmsg += "`n`nFiles not formatted:"
             }
             Write-Host $lastcommitmsg
-            git checkout -b format-branch-rebase-temp $testbranch
-            git rebase format-branch-temp
+            git checkout -b format-branch-rebase-temp $testbranch *>$null
+            git rebase $outbranch *>$null
             if(test-path .git/rebase-apply)
             {
                 $failedfiles = git diff --name-only --diff-filter=U
-                git rebase --abort
-                git checkout format-branch-temp
-                git reset --mixed head^
+                git rebase --abort *>$null
+                git checkout $outbranch *>$null
+                git reset --mixed head^ *>$null
                 foreach ($file in $failedfiles)
                 {
                     Write-Host "reset $file"
                     $lastcommitmsg += "`n$file"
-                    git checkout -- $file
+                    git checkout -- $file *>$null
                 }
-                git add .
-                git commit -m $lastcommitmsg
+                git add . 1>$null
+                git commit -m $lastcommitmsg *>$null
             }
             else
             {
                 $checkForMergeConflicts = $false
             }
 
-            git checkout format-branch-temp
-            git branch -D format-branch-rebase-temp
+            git checkout $outbranch *>$null
+            git branch -D format-branch-rebase-temp *>$null
         }
     }
 }
