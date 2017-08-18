@@ -6,23 +6,22 @@ function Set-NoProxy($noProxy)
 
 function Set-Proxy($proxy)
 {
+    Set-ProxyEnvironmentVariable $Proxy
+}
+
+function Clear-Proxy
+{
+    Set-ProxyEnvironmentVariable $null
+}
+
+function Set-ProxyEnvironmentVariable($proxy)
+{
     [Environment]::SetEnvironmentVariable("http_proxy", $proxy, "Machine")
     [Environment]::SetEnvironmentVariable("https_proxy", $proxy, "Machine")
     [Environment]::SetEnvironmentVariable("http_proxy", $proxy, "Process")
     [Environment]::SetEnvironmentVariable("https_proxy", $proxy, "Process")
     $http_proxy = $proxy
     $https_proxy = $proxy
-}
-
-function Clear-Proxy
-{
-    $oldProxy = $env:https_proxy
-    [Environment]::SetEnvironmentVariable("http_proxy", $null, "Machine")
-    [Environment]::SetEnvironmentVariable("https_proxy", $null, "Machine")
-    [Environment]::SetEnvironmentVariable("http_proxy", $null, "Process")
-    [Environment]::SetEnvironmentVariable("https_proxy", $null, "Process")
-    $http_proxy = $null
-    $https_proxy = $null
 }
 
 export-modulemember -function Set-Proxy
