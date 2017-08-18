@@ -12,6 +12,7 @@ function Set-Proxy {
         [String[]]$Acs
     )            
 
+    Write-Host "Setting proxy to $Proxy $Acs"
     Clear-Proxy
     Set-ProxyEnvironmentVariable $Proxy
     Set-IeProxy $Proxy $Acs
@@ -19,6 +20,7 @@ function Set-Proxy {
 
 function Clear-Proxy
 {
+    Write-Host "Clearing proxies."
     Set-ProxyEnvironmentVariable $null
     Clear-IeProxy
 }
