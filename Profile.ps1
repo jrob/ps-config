@@ -2,7 +2,7 @@ $scripts = "$home\scripts"
 
 Import-Module PSReadLine
 Import-Module Posh-Git
-Import-Module "$scripts\PowerShell\Proxy-Helpers.psm1"
+Import-Module "$scripts\PowerShell\Network-Helpers.psm1"
 
 $env:Path += ";$scripts\powershell"
 $env:Path += ";$scripts\python"
