@@ -6,6 +6,7 @@ function Set-NoProxy($noProxy)
 
 function Set-Proxy($proxy)
 {
+    Clear-Proxy
     Set-ProxyEnvironmentVariable $Proxy
 }
 
