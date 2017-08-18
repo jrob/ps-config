@@ -4,8 +4,11 @@ function Set-NoProxy($noProxy)
     [Environment]::SetEnvironmentVariable("no_proxy", $noProxy, "Process")
 }
 
-function Set-Proxy($proxy)
-{
+function Set-Proxy {
+    [CmdletBinding()] param(
+        [String[]]$Proxy
+    )            
+
     Clear-Proxy
     Set-ProxyEnvironmentVariable $Proxy
 }
