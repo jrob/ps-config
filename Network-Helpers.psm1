@@ -12,6 +12,12 @@ function Set-Proxy {
         [String[]]$Acs
     )            
 
+    $currentProxyUrl = [Environment]::GetEnvironmentVariable("http_proxy", "Machine")
+    if ($currentProxyUrl -eq $Proxy) {
+        Write-Host "Proxy already set."
+        return
+    }
+
     Write-Host "Setting proxy to $Proxy $Acs"
     Clear-Proxy
     Set-ProxyEnvironmentVariable $Proxy
