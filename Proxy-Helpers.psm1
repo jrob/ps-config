@@ -12,7 +12,6 @@ function Set-Proxy($proxy)
     [Environment]::SetEnvironmentVariable("https_proxy", $proxy, "Process")
     $http_proxy = $proxy
     $https_proxy = $proxy
-    choco config set proxy $proxy
 }
 
 function Clear-Proxy
@@ -24,7 +23,6 @@ function Clear-Proxy
     [Environment]::SetEnvironmentVariable("https_proxy", $null, "Process")
     $http_proxy = $null
     $https_proxy = $null
-    choco config unset proxy
 }
 
 export-modulemember -function Set-Proxy
