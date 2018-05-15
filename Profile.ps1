@@ -3,6 +3,7 @@ $scripts = "$home\scripts"
 Import-Module PSReadLine
 Import-Module Posh-Git
 Import-Module "$scripts\PowerShell\Network-Helpers.psm1"
+. "$scripts\PowerShell\Set-NetworkEnvironment.ps1"
 
 $env:Path += ";$scripts\powershell"
 $env:Path += ";$scripts\python"
