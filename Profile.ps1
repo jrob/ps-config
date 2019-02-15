@@ -6,6 +6,8 @@ Import-Module "$scripts\PowerShell\Network-Helpers.psm1"
 Import-Module "$scripts\PowerShell\Git-Helpers.psm1"
 . "$scripts\PowerShell\Set-NetworkEnvironment.ps1"
 
+remove-item alias:curl
+
 $env:Path += ";$scripts\powershell"
 $env:Path += ";$scripts\python"
 $env:Path += ";$scripts\Perl\ack"
@@ -37,7 +39,7 @@ $Host.PrivateData.VerboseBackgroundColor = $background
 $options = Get-PSReadlineOption
 $options.NumberForegroundColor = $foreground
 $options.MemberForegroundColor = "DarkGray"
-cd ~
+# cd ~
 
 # Shamelessly modified from http://www.winterdom.com/powershell/2008/08/13/mypowershellprompt.html
 $Global:skip = $true
