@@ -8,6 +8,10 @@ if (Test-Path($ChocolateyProfile)) {
 
 if (Get-Module -ListAvailable -Name PSReadLine) {
     Import-Module PSReadLine
+    Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+    Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+    Set-PSReadlineOption -HistoryNoDuplicates
+    Set-PSReadlineOption -MaximumHistoryCount 16384
 } 
 else {
     Write-Host "PSReadLine module does not exist"
@@ -38,10 +42,6 @@ Function vi { & "C:\Program Files (x86)\vim\vim74\gvim.exe" --remote-tab-silent 
 Set-Alias mr "$scripts\PowerShell\MassRename.ps1"
 Set-Alias which "$scripts\PowerShell\Which.ps1"
 
-Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
-Set-PSReadlineOption -HistoryNoDuplicates
-Set-PSReadlineOption -MaximumHistoryCount 16384
 
 # Set colors
 
