@@ -15,6 +15,7 @@ else {
 
 if (Get-Module -ListAvailable -Name Posh-Git) {
     Import-Module Posh-Git
+    $poshgit = $false
 } 
 else {
     Write-Host "Posh-Git module does not exist"
@@ -76,7 +77,7 @@ function prompt {
     Write-Host -NoNewline -ForegroundColor $cdelim ' '
     Write-Host -NoNewline -ForegroundColor $cloc (shorten-path (pwd).Path)
     #write-host -f $cdelim '}'
-    Write-VcsStatus
+    if ($poshgit) { Write-VcsStatus }
     Write-Host -ForegroundColor $cdelim ''
     Write-Host -NoNewline '$'
     return ' '
