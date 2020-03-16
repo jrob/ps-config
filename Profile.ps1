@@ -6,7 +6,13 @@ if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
 
-Import-Module PSReadLine
+if (Get-Module -ListAvailable -Name PSReadLine) {
+    Import-Module PSReadLine
+} 
+else {
+    Write-Host "PSReadLine module does not exist"
+}
+
 Import-Module Posh-Git
 Import-Module "$scripts\PowerShell\Network-Helpers.psm1"
 Import-Module "$scripts\PowerShell\Git-Helpers.psm1"
