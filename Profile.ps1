@@ -1,5 +1,11 @@
 $scripts = "$home\scripts"
 
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}
+
 Import-Module PSReadLine
 Import-Module Posh-Git
 Import-Module "$scripts\PowerShell\Network-Helpers.psm1"
