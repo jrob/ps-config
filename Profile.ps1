@@ -13,7 +13,13 @@ else {
     Write-Host "PSReadLine module does not exist"
 }
 
-Import-Module Posh-Git
+if (Get-Module -ListAvailable -Name Posh-Git) {
+    Import-Module Posh-Git
+} 
+else {
+    Write-Host "Posh-Git module does not exist"
+}
+
 Import-Module "$scripts\PowerShell\Network-Helpers.psm1"
 Import-Module "$scripts\PowerShell\Git-Helpers.psm1"
 . "$scripts\PowerShell\Set-NetworkEnvironment.ps1"
