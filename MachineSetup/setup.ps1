@@ -8,6 +8,8 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 # https://aka.ms/wsl2kernel
 
+wsl --set-default-version 2
+
 #>
 
 <#
