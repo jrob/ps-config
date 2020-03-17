@@ -28,9 +28,7 @@ else {
     Write-Host "Posh-Git module does not exist"
 }
 
-Import-Module "$psScripts\Network-Helpers.psm1"
 Import-Module "$psScripts\Git-Helpers.psm1"
-. "$psScripts\Set-NetworkEnvironment.ps1"
 
 Remove-Item alias:curl -ErrorAction Ignore
 
