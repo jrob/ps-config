@@ -98,9 +98,9 @@ function Install-AppsWork
     choco install -y packer
 
     # Dev
-    choco install -y virtualbox --allow-empty-checksums
-    choco install -y VirtualBox.ExtensionPack --allow-empty-checksums
+    choco install -y virtualbox
     choco install -y visualstudio2015enterprise
+    Install-SsdtVs2015
     choco install -y sql-server-management-studio
     choco install -y awscli
     choco install -y chefdk
@@ -122,23 +122,6 @@ function Get-UserPassword
     $response = Read-host "What's your password?" -AsSecureString
     $password = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($response))
     return $password
-}
-
-function Install-DevExpress($custid, $email, $password)
-{
-    Write-Host "Install DevExpress"
-    psexec -h -d "C:\Program Files\AutoHotkey\AutoHotkey.exe" "$($env:USERPROFILE)\Scripts\Powershell\MachineSetup\devexpress.ahk"
-    $file = "D:\Archives\DXperience-8.3.8.exe"
-    $arglist = @(
-        "/Q",
-        "/EMAIL:$email",
-        "/CUSTOMERID:$custid",
-        "/PASSWORD:$password",
-        "/DEBUG",
-        '"Demos:False"'
-        )
-    Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
-    Write-Host "DevExpress finished"
 }
 
 function Setup-VirtualMachineTask($vmname, $user, $pass)
@@ -193,12 +176,6 @@ function Install-Ssdt
     $arglist = @("/silent")
     Start-Process $file -ArgumentList $arglist -Wait -NoNewWindow
     Write-Host "Ssdt finished"
-}
-
-function Install-BitviseSshServer($settings, $activationCode, $keypairFile)
-{
-    $packageParams =  "'/acceptEULA /activationCode=$activationCode /settings=$settings /keypairs=$keypairFile'"
-    choco install -y bitvise-ssh-server --allow-empty-checksums --ignore-checksums --package-parameters $packageParams
 }
 
 function Install-Office
