@@ -38,10 +38,13 @@ Add-Content $profile '. "$env:USERPROFILE\dev\ps-config\profile.ps1"'
 #>
 
 choco upgrade `
+    chocolatey `
     openssh `
+    powershell-core `
     vim `
     git `
     microsoft-windows-terminal `
+    wsl-ubuntu-1804 `
     7zip `
     beyondcompare `
     git-fork `
