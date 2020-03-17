@@ -27,6 +27,9 @@ popd
 New-Item –Path $Profile –Type File –Force
 Add-Content $profile '. "$env:USERPROFILE\dev\ps-config\profile.ps1"'
 
+$profilePS7 = "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+New-Item –Path $ProfilePS7 –Type File –Force
+Add-Content $profile '. "$env:USERPROFILE\dev\ps-config\profile.ps1"'
 #>
 
 choco upgrade `

@@ -29,7 +29,7 @@ Import-Module "$psScripts\Network-Helpers.psm1"
 Import-Module "$psScripts\Git-Helpers.psm1"
 . "$psScripts\Set-NetworkEnvironment.ps1"
 
-remove-item alias:curl
+Remove-Item alias:curl -ErrorAction Ignore
 
 $env:Path += ";$psScripts\powershell"
 $env:Path += ";$scripts\python"
