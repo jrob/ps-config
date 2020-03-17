@@ -1,4 +1,4 @@
-$scripts = "$home\scripts"
+$psScripts = "$home\dev\ps-config"
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -25,13 +25,13 @@ else {
     Write-Host "Posh-Git module does not exist"
 }
 
-Import-Module "$scripts\PowerShell\Network-Helpers.psm1"
-Import-Module "$scripts\PowerShell\Git-Helpers.psm1"
-. "$scripts\PowerShell\Set-NetworkEnvironment.ps1"
+Import-Module "$psScripts\Network-Helpers.psm1"
+Import-Module "$psScripts\Git-Helpers.psm1"
+. "$psScripts\Set-NetworkEnvironment.ps1"
 
 remove-item alias:curl
 
-$env:Path += ";$scripts\powershell"
+$env:Path += ";$psScripts\powershell"
 $env:Path += ";$scripts\python"
 $env:Path += ";$scripts\Perl\ack"
 $env:PATHEXT += ";.py"
@@ -39,9 +39,8 @@ $env:PATHEXT += ";.pl"
 
 Function vi { & "C:\Program Files (x86)\vim\vim74\gvim.exe" --remote-tab-silent $args }
 
-Set-Alias mr "$scripts\PowerShell\MassRename.ps1"
-Set-Alias which "$scripts\PowerShell\Which.ps1"
-
+Set-Alias mr "$psScripts\MassRename.ps1"
+Set-Alias which "$psScripts\Which.ps1"
 
 # Set colors
 
