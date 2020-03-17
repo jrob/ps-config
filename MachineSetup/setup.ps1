@@ -1,8 +1,13 @@
 <#
 # Manual commands or reboots required.
 Set-ExecutionPolicy RemoteSigned -force
+
+# WSL
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+# https://aka.ms/wsl2kernel
+
 #>
 
 <#
