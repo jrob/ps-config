@@ -19,7 +19,7 @@ else {
 
 if (Get-Module -ListAvailable -Name Posh-Git) {
     Import-Module Posh-Git
-    $poshgit = $false
+    $poshgit = $true
 } 
 else {
     Write-Host "Posh-Git module does not exist"
