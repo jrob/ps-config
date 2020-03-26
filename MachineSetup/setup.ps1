@@ -46,6 +46,8 @@ choco upgrade `
     vim `
     git `
     microsoft-windows-terminal `
+    firacode `
+    poshgit `
     wsl-ubuntu-1804 `
     7zip `
     beyondcompare `
@@ -55,7 +57,6 @@ choco upgrade `
     python `
     activeperl `
     nodejs `
-    f.lux `
     inputdirector `
     gitextensions `
     vscode `
@@ -73,9 +74,7 @@ choco upgrade `
     resharper-ultimate-all `
     sql-server-management-studio `
     awscli `
+    windbg `
     -y
 
 refreshenv
-
-#Install-PackageProvider -Force -Name NuGet
-#Install-Module -Force Posh-Git
