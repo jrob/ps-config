@@ -43,11 +43,9 @@ choco upgrade `
     chocolatey `
     openssh `
     powershell-core `
-    vim `
     git `
     microsoft-windows-terminal `
     firacode `
-    poshgit `
     wsl-ubuntu-1804 `
     7zip `
     beyondcompare `
@@ -61,20 +59,49 @@ choco upgrade `
     gitextensions `
     vscode `
     paint.net `
+    foxitreader `
     firefox `
     GoogleChrome `
-    docker-desktop `
     spacesniffer `
     dropbox `
     slack `
     citrix-workspace `
     microsoft-teams `
     office365proplus `
+    dotnetcore-sdk `
     visualstudio2019enterprise `
+    nugetpackageexplorer `
     resharper-ultimate-all `
     sql-server-management-studio `
+    dbforge-sql-cmpl-exp `
     awscli `
+    drawio `
+    nirlauncher `
+    steam `
     windbg `
+    sweet-home-3d `
+    autodesk-fusion360 `
+    discord `
+    veeam-agent `
+    irfanview `
+    jdownloader `
+    qsync `
+    screenruler `
+    chocolateygui `
+    etcher `
+    calibre `
+    prusaslicer `
+    meshmixer `
+    blender `
+    golang `
+    openscad `
+    gnupg `
+    gopass `
+    lense `
+    krew `
+    autohotkey `
+    postman `
+    fxf `
     -y
 
 refreshenv
