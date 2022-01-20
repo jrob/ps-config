@@ -1,0 +1,6 @@
+; Will cause chrome to show as "Managed by your organization"
+; chrome://policy/
+
+Windows Registry Editor Version 5.00
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome]
+"ExternalProtocolDialogShowAlwaysOpenCheckbox"=dword:00000001

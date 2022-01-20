@@ -39,6 +39,9 @@ New-Item –Path $ProfilePS7 –Type File –Force
 Add-Content $profile '. "$env:USERPROFILE\dev\ps-config\profile.ps1"'
 #>
 
+# Autoupdates after install
+# docker-desktop `
+
 choco upgrade `
     chocolatey `
     openssh `
@@ -103,5 +106,24 @@ choco upgrade `
     postman `
     fxf `
     -y
+    #vim `
+
+    # poshgit `
 
 refreshenv
+
+# Install-Module -Name SqlServer
+# Install-Module posh-git
+# Install-Module oh-my-posh -Scope CurrentUser -AllowPrerelease -Force
+
+# https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/SemiBold/complete/Fira%20Code%20SemiBold%20Nerd%20Font%20Complete%20Windows%20Compatible.ttf
+function get-FiraNerdFont($font)
+{
+    $url = "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/${font}/complete/Fira%20Code%20${font}%20Nerd%20Font%20Complete%20Windows%20Compatible.ttf"
+    curl -L $url --output "Fira Code Nerd Font ${font}.ttf"
+}
+#Get-FiraNerdFont "Bold"
+#Get-FiraNerdFont "Light"
+#Get-FiraNerdFont "Medium"
+#Get-FiraNerdFont "Regular"
+#Get-FiraNerdFont "SemiBold"
